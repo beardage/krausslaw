@@ -1,18 +1,33 @@
 <script lang="ts">
-	import { spring } from 'svelte/motion';
 
 	async function handleSubmit(event) {
 		console.log(event);
 		console.log(event.target);
-		console.log(event.target.grid-first-name.value);
-		console.log(event.target.grid-last-name.value);
+		console.log(event.target.firstname.value);
+		console.log(event.target.lastname.value);
 		console.log(event.target.email.value);
 		console.log(event.target.message.value);
+
+		let formInfo = JSON.stringify({
+			firstName: event.target.firstname.value,
+			lastName: event.target.lastname.value,
+			email: event.target.email.value,
+			message: event.target.email.value
+		});
+
+		const response = await fetch("/submit-message", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: formInfo,
+		});
 	}
 
 </script>
 
-<form class="w-full my-20" on:submit|preventDefault="{handleSubmit}">
+<form class="w-full my-20" on:submit|preventDefault="{handleSubmit}"> 
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 			<label
