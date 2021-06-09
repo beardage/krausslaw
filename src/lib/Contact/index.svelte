@@ -28,6 +28,7 @@
 </script>
 
 <form netlify netlify-honeypot="bot-field" class="w-full my-20"> 
+	<input type="hidden" name="form-name" value="contact-form">
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 			<label
@@ -39,6 +40,7 @@
 			<input
 				class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
 				id="firstname"
+				name="firstname"
 				type="text"
 				placeholder="Jane"
 			/>
@@ -57,6 +59,7 @@
 			<input
 				class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 				id="lastname"
+				name="lastname"
 				type="text"
 				placeholder="Doe"
 			/>
@@ -75,6 +78,7 @@
 			<input
 				class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 				id="email"
+				name="email"
 				type="email"
 			/>
 
@@ -94,6 +98,7 @@
 			<textarea
 				class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
 				id="message"
+				name="message"
 			/>
 
 			<p class="text-gray-600 text-xs italic">
@@ -102,6 +107,7 @@
 		</div>
 	</div>
 
+	<input type="text" name="bot-field">
 	<div class="md:flex md:items-center">
 		<div class="md:w-1/3">
 			<button
@@ -112,6 +118,7 @@
 		</div>
 
 		<div class="md:w-2/3" />
+
 	</div>
 </form>
 
