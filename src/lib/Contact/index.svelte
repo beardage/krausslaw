@@ -8,27 +8,20 @@
 		console.log(event.target.email.value);
 		console.log(event.target.message.value);
 
-		let formInfo = JSON.stringify({
-			firstName: event.target.firstname.value,
-			lastName: event.target.lastname.value,
-			email: event.target.email.value,
-			message: event.target.email.value
-		});
+		let formInfo = new FormData(event.target);
 
-		const response = await fetch("/submit-message", {
+		const response = await fetch("/", {
 			method: 'POST',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			body: formInfo,
-		});
+		}).then(() => console.log('form succesfully submitted')).catch((error) => console.log(error));
 	}
 
 </script>
 
-<form netlify netlify-honeypot="bot-field" class="w-full my-20"> 
-	<input type="hidden" name="form-name" value="contact-form">
+<form netlify netlify-honeypot="bot-field" name="contact-form" class="w-full my-20" on:submit|preventDefault={handleSubmit}> 
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 			<label
@@ -107,7 +100,7 @@
 		</div>
 	</div>
 
-	<input type="text" name="bot-field">
+	<input class="hidden" type="text" name="bot-field">
 	<div class="md:flex md:items-center">
 		<div class="md:w-1/3">
 			<button
