@@ -1613,8 +1613,8 @@ function normalize(loaded) {
   }
   return loaded;
 }
-function resolve(base2, path) {
-  const baseparts = path[0] === "/" ? [] : base2.slice(1).split("/");
+function resolve(base, path) {
+  const baseparts = path[0] === "/" ? [] : base.slice(1).split("/");
   const pathparts = path[0] === "/" ? path.slice(1).split("/") : path.split("/");
   baseparts.pop();
   for (let i = 0; i < pathparts.length; i += 1) {
@@ -1687,7 +1687,7 @@ async function load_node({
           const resolved = resolve(request.path, path);
           const filename = resolved.slice(1);
           const filename_html = `${filename}/index.html`;
-          const asset = options2.manifest.assets.find((d2) => d2.file === filename || d2.file === filename_html);
+          const asset = options2.manifest.assets.find((d) => d.file === filename || d.file === filename_html);
           if (asset) {
             if (options2.read) {
               response = new Response(options2.read(asset.file), {
@@ -2414,13 +2414,6 @@ var escaped2 = {
 function escape2(html) {
   return String(html).replace(/["'&<>]/g, (match) => escaped2[match]);
 }
-function each(items, fn) {
-  let str = "";
-  for (let i = 0; i < items.length; i += 1) {
-    str += fn(items[i], i);
-  }
-  return str;
-}
 var missing_component = {
   $$render: () => ""
 };
@@ -2466,11 +2459,6 @@ function create_ssr_component(fn) {
     },
     $$render
   };
-}
-function add_attribute(name, value, boolean) {
-  if (value == null || boolean && !value)
-    return "";
-  return ` ${name}${value === true ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
 }
 function destroy_component(component, detaching) {
   const $$ = component.$$;
@@ -2640,9 +2628,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-b29e40e1.js",
+      file: "/./_app/start-c15b0cb0.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-b29e40e1.js", "/./_app/chunks/vendor-7f4bcc7a.js"]
+      js: ["/./_app/start-c15b0cb0.js", "/./_app/chunks/vendor-aa005325.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2667,7 +2655,6 @@ function init(settings) {
     trailing_slash: "never"
   };
 }
-var d = decodeURIComponent;
 var empty = () => ({});
 var manifest = {
   assets: [{ "file": "favicon.png", "size": 1571, "type": "image/png" }, { "file": "robots.txt", "size": 67, "type": "text/plain" }, { "file": "svelte-welcome.png", "size": 360807, "type": "image/png" }, { "file": "svelte-welcome.webp", "size": 115470, "type": "image/webp" }],
@@ -2696,27 +2683,11 @@ var manifest = {
       b: [".svelte-kit/build/components/error.svelte"]
     },
     {
-      type: "endpoint",
-      pattern: /^\/todos\.json$/,
-      params: empty,
-      load: () => Promise.resolve().then(function() {
-        return index_json;
-      })
-    },
-    {
       type: "page",
-      pattern: /^\/todos\/?$/,
+      pattern: /^\/faq\/?$/,
       params: empty,
-      a: ["src/routes/__layout.svelte", "src/routes/todos/index.svelte"],
+      a: ["src/routes/__layout.svelte", "src/routes/faq.svelte"],
       b: [".svelte-kit/build/components/error.svelte"]
-    },
-    {
-      type: "endpoint",
-      pattern: /^\/todos\/([^/]+?)\.json$/,
-      params: (m) => ({ uid: d(m[1]) }),
-      load: () => Promise.resolve().then(function() {
-        return _uid__json;
-      })
     }
   ]
 };
@@ -2732,7 +2703,7 @@ var module_lookup = {
     return error2;
   }),
   "src/routes/index.svelte": () => Promise.resolve().then(function() {
-    return index$1;
+    return index;
   }),
   "src/routes/contact.svelte": () => Promise.resolve().then(function() {
     return contact;
@@ -2740,11 +2711,11 @@ var module_lookup = {
   "src/routes/about.svelte": () => Promise.resolve().then(function() {
     return about;
   }),
-  "src/routes/todos/index.svelte": () => Promise.resolve().then(function() {
-    return index;
+  "src/routes/faq.svelte": () => Promise.resolve().then(function() {
+    return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-eeb965ee.js", "css": ["/./_app/assets/pages/__layout.svelte-8956fd6a.css"], "js": ["/./_app/pages/__layout.svelte-eeb965ee.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-f5b2de1a.js", "css": [], "js": ["/./_app/error.svelte-f5b2de1a.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-98aed230.js", "css": [], "js": ["/./_app/pages/index.svelte-98aed230.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-b8c384b7.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-b8c384b7.js", "/./_app/chunks/vendor-7f4bcc7a.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-8e0e51e9.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-8e0e51e9.js", "/./_app/chunks/vendor-7f4bcc7a.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/todos/index.svelte": { "entry": "/./_app/pages/todos/index.svelte-64de7e97.js", "css": ["/./_app/assets/pages/todos/index.svelte-f4d9bf4b.css"], "js": ["/./_app/pages/todos/index.svelte-64de7e97.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-03a17373.js", "css": ["/./_app/assets/pages/__layout.svelte-d4718d75.css"], "js": ["/./_app/pages/__layout.svelte-03a17373.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-3d114cf6.js", "css": [], "js": ["/./_app/error.svelte-3d114cf6.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-70f600bb.js", "css": [], "js": ["/./_app/pages/index.svelte-70f600bb.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-babc6a3b.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-babc6a3b.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4e577bb6.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-4e577bb6.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-3338f5c0.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/faq.svelte-3338f5c0.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2758,65 +2729,6 @@ function render(request, {
   const host = request.headers["host"];
   return respond({ ...request, host }, options, { prerender: prerender2 });
 }
-var base = "https://api.svelte.dev";
-async function api(request, resource, data) {
-  if (!request.locals.userid) {
-    return { status: 401 };
-  }
-  const res = await fetch(`${base}/${resource}`, {
-    method: request.method,
-    headers: {
-      "content-type": "application/json"
-    },
-    body: data && JSON.stringify(data)
-  });
-  if (res.ok && request.method !== "GET" && request.headers.accept !== "application/json") {
-    return {
-      status: 303,
-      headers: {
-        location: "/todos"
-      }
-    };
-  }
-  return {
-    status: res.status,
-    body: await res.json()
-  };
-}
-var get = async (request) => {
-  const response = await api(request, `todos/${request.locals.userid}`);
-  if (response.status === 404) {
-    return { body: [] };
-  }
-  return response;
-};
-var post = async (request) => {
-  const response = await api(request, `todos/${request.locals.userid}`, {
-    text: request.body.get("text")
-  });
-  return response;
-};
-var index_json = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  get,
-  post
-});
-var patch = async (request) => {
-  return api(request, `todos/${request.locals.userid}/${request.params.uid}`, {
-    text: request.body.get("text"),
-    done: request.body.has("done") ? !!request.body.get("done") : void 0
-  });
-};
-var del = async (request) => {
-  return api(request, `todos/${request.locals.userid}/${request.params.uid}`);
-};
-var _uid__json = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  patch,
-  del
-});
 var getStores = () => {
   const stores = getContext("__svelte__");
   return {
@@ -2848,7 +2760,7 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<header class="${"container mx-auto flex"}"><div class="${"logo"}"><a class="${"p-4"}" href="${"/"}">KraussLaw</a></div>
 	<nav><ul class="${"flex justify-start uppercase"}"><li class="${["inline-block", $page.path === "/" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/"}">Home</a></li>
 			<li class="${["inline-block", $page.path === "/about" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/about"}">About</a></li>
-			<li class="${["inline-block", $page.path === "/todos" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/todos"}">Todos</a></li>
+			<li class="${["inline-block", $page.path === "/faq" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/todos"}">Frequently Asked Questions</a></li>
 			<li class="${["inline-block", $page.path === "/contact" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/contact"}">Contact</a></li></ul></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -2874,10 +2786,10 @@ var __layout = /* @__PURE__ */ Object.freeze({
   [Symbol.toStringTag]: "Module",
   "default": _layout
 });
-function load$1({ error: error22, status }) {
+function load({ error: error22, status }) {
   return { props: { error: error22, status } };
 }
-var Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+var Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { status } = $$props;
   let { error: error22 } = $$props;
   if ($$props.status === void 0 && $$bindings.status && status !== void 0)
@@ -2894,20 +2806,20 @@ ${error22.stack ? `<pre>${escape2(error22.stack)}</pre>` : ``}`;
 var error2 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": Error$1,
-  load: load$1
+  "default": Error2,
+  load
 });
-var prerender$2 = true;
+var prerender$3 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>KraussLaw - Home</title>`, ""}`, ""}
 
 <section><h1>Welcome</h1></section>`;
 });
-var index$1 = /* @__PURE__ */ Object.freeze({
+var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Routes,
-  prerender: prerender$2
+  prerender: prerender$3
 });
 var browser = false;
 var dev = false;
@@ -2977,9 +2889,9 @@ var css$2 = {
   code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
   map: `{"version":3,"file":"contact.svelte","sources":["contact.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n    \\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<script lang=\\"ts\\">import Contact from '$lib/Contact/index.svelte';\\n<\/script>\\n\\n\\n<svelte:head>\\n\\t<title>Contact</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>Contact</h1>\\n    <Contact/>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AA6BO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
 };
-var hydrate$1 = dev;
-var router$1 = browser;
-var prerender$1 = true;
+var hydrate$2 = dev;
+var router$2 = browser;
+var prerender$2 = true;
 var Contact_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$2);
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
@@ -2992,141 +2904,53 @@ var contact = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Contact_1,
-  hydrate: hydrate$1,
-  router: router$1,
-  prerender: prerender$1
+  hydrate: hydrate$2,
+  router: router$2,
+  prerender: prerender$2
 });
 var css$1 = {
   code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
-  map: `{"version":3,"file":"about.svelte","sources":["about.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>About</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>About this app</h1>\\n\\n\\t<p>\\n\\t\\tThis is a <a href=\\"https://kit.svelte.dev\\">SvelteKit</a> app. You can make your own by typing the\\n\\t\\tfollowing into your command line and following the prompts:\\n\\t</p>\\n\\n\\t<!-- TODO lose the @next! -->\\n\\t<pre>npm init svelte@next</pre>\\n\\n\\t<p>\\n\\t\\tThe page you're looking at is purely static HTML, with no client-side interactivity needed.\\n\\t\\tBecause of that, we don't need to load any JavaScript. Try viewing the page's source, or opening\\n\\t\\tthe devtools network panel and reloading.\\n\\t</p>\\n\\n\\t<p>\\n\\t\\tThe <a href=\\"/todos\\">TODOs</a> page illustrates SvelteKit's data loading and form handling. Try using\\n\\t\\tit with JavaScript disabled!\\n\\t</p>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AA2CO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
+  map: `{"version":3,"file":"about.svelte","sources":["about.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>About</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>About KraussLaw</h1>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
 };
-var hydrate = dev;
-var router = browser;
-var prerender = true;
+var hydrate$1 = dev;
+var router$1 = browser;
+var prerender$1 = true;
 var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$1);
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
 
-<div class="${"content svelte-s8amym"}"><h1>About this app</h1>
-
-	<p>This is a <a href="${"https://kit.svelte.dev"}">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
-
-	
-	<pre>npm init svelte@next</pre>
-
-	<p>The page you&#39;re looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don&#39;t need to load any JavaScript. Try viewing the page&#39;s source, or opening
-		the devtools network panel and reloading.
-	</p>
-
-	<p>The <a href="${"/todos"}">TODOs</a> page illustrates SvelteKit&#39;s data loading and form handling. Try using
-		it with JavaScript disabled!
-	</p>
+<div class="${"content svelte-s8amym"}"><h1>About KraussLaw</h1>
 </div>`;
 });
 var about = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": About,
+  hydrate: hydrate$1,
+  router: router$1,
+  prerender: prerender$1
+});
+var css = {
+  code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
+  map: `{"version":3,"file":"faq.svelte","sources":["faq.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>Frequently Asked Questions</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>Frequently Asked Questions</h1>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
+};
+var hydrate = dev;
+var router = browser;
+var prerender = true;
+var Faq = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css);
+  return `${$$result.head += `${$$result.title = `<title>Frequently Asked Questions</title>`, ""}`, ""}
+
+<div class="${"content svelte-s8amym"}"><h1>Frequently Asked Questions</h1>
+</div>`;
+});
+var faq = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": Faq,
   hydrate,
   router,
   prerender
-});
-var css = {
-  code: `.todos.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto;line-height:1}.new.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{margin:0 0 0.5rem 0}input.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{border:1px solid transparent}input.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh:focus-visible{box-shadow:inset 1px 1px 6px rgba(0, 0, 0, 0.1);border:1px solid #ff3e00 !important;outline:none}.new.svelte-1hyunuh input.svelte-1hyunuh.svelte-1hyunuh{font-size:28px;width:100%;padding:0.5em 1em 0.3em 1em;box-sizing:border-box;background:rgba(255, 255, 255, 0.05);border-radius:8px;text-align:center}.todo.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{display:grid;grid-template-columns:2rem 1fr 2rem;grid-gap:0.5rem;align-items:center;margin:0 0 0.5rem 0;padding:0.5rem;background-color:white;border-radius:8px;filter:drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));transform:translate(-1px, -1px);transition:filter 0.2s, transform 0.2s}.done.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{transform:none;opacity:0.4;filter:drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1))}form.text.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{position:relative;display:flex;align-items:center;flex:1}.todo.svelte-1hyunuh input.svelte-1hyunuh.svelte-1hyunuh{flex:1;padding:0.5em 2em 0.5em 0.8em;border-radius:3px}.todo.svelte-1hyunuh button.svelte-1hyunuh.svelte-1hyunuh{width:2em;height:2em;border:none;background-color:transparent;background-position:50% 50%;background-repeat:no-repeat}button.toggle.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{border:1px solid rgba(0, 0, 0, 0.2);border-radius:50%;box-sizing:border-box;background-size:1em auto}.done.svelte-1hyunuh .toggle.svelte-1hyunuh.svelte-1hyunuh{background-image:url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}.delete.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 5V22H19.5V5H4.5Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M10 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 5H22' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5L9.6445 2H14.3885L16 5H8Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E%0A");opacity:0.2}.delete.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh:hover,.delete.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh:focus{transition:opacity 0.2s;opacity:1}.save.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh{position:absolute;right:0;opacity:0;background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2H3.5C2.67158 2 2 2.67157 2 3.5V20.5C2 21.3284 2.67158 22 3.5 22H20.5C21.3284 22 22 21.3284 22 20.5V3.5C22 2.67157 21.3284 2 20.5 2Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M17 2V11H7.5V2H17Z' fill='white' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M13.5 5.5V7.5' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M5.99844 2H18.4992' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A")}.todo.svelte-1hyunuh input.svelte-1hyunuh:focus+.save.svelte-1hyunuh,.save.svelte-1hyunuh.svelte-1hyunuh.svelte-1hyunuh:focus{transition:opacity 0.2s;opacity:1}`,
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\" lang=\\"ts\\">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\\n    return new (P || (P = Promise))(function (resolve, reject) {\\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\\n        function rejected(value) { try { step(generator[\\"throw\\"](value)); } catch (e) { reject(e); } }\\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\\n    });\\n};\\nimport { enhance } from '$lib/form';\\n;\\n// see https://kit.svelte.dev/docs#loading\\nexport const load = ({ fetch }) => __awaiter(void 0, void 0, void 0, function* () {\\n    const res = yield fetch('/todos.json');\\n    if (res.ok) {\\n        const todos = yield res.json();\\n        return {\\n            props: { todos }\\n        };\\n    }\\n    const { message } = yield res.json();\\n    return {\\n        error: new Error(message)\\n    };\\n});\\n<\/script>\\n\\n<script lang=\\"ts\\">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\\n    return new (P || (P = Promise))(function (resolve, reject) {\\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\\n        function rejected(value) { try { step(generator[\\"throw\\"](value)); } catch (e) { reject(e); } }\\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\\n    });\\n};\\nimport { scale } from 'svelte/transition';\\nimport { flip } from 'svelte/animate';\\nexport let todos;\\nfunction patch(res) {\\n    return __awaiter(this, void 0, void 0, function* () {\\n        const todo = yield res.json();\\n        todos = todos.map((t) => {\\n            if (t.uid === todo.uid)\\n                return todo;\\n            return t;\\n        });\\n    });\\n}\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>Todos</title>\\n</svelte:head>\\n\\n<div class=\\"todos\\">\\n\\t<h1>Todos</h1>\\n\\n\\t<form\\n\\t\\tclass=\\"new\\"\\n\\t\\taction=\\"/todos.json\\"\\n\\t\\tmethod=\\"post\\"\\n\\t\\tuse:enhance={{\\n\\t\\t\\tresult: async (res, form) => {\\n\\t\\t\\t\\tconst created = await res.json();\\n\\t\\t\\t\\ttodos = [...todos, created];\\n\\n\\t\\t\\t\\tform.reset();\\n\\t\\t\\t}\\n\\t\\t}}\\n\\t>\\n\\t\\t<input name=\\"text\\" aria-label=\\"Add todo\\" placeholder=\\"+ tap to add a todo\\" />\\n\\t</form>\\n\\n\\t{#each todos as todo (todo.uid)}\\n\\t\\t<div\\n\\t\\t\\tclass=\\"todo\\"\\n\\t\\t\\tclass:done={todo.done}\\n\\t\\t\\ttransition:scale|local={{ start: 0.7 }}\\n\\t\\t\\tanimate:flip={{ duration: 200 }}\\n\\t\\t>\\n\\t\\t\\t<form\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=patch\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tpending: (data) => {\\n\\t\\t\\t\\t\\t\\ttodo.done = !!data.get('done');\\n\\t\\t\\t\\t\\t},\\n\\t\\t\\t\\t\\tresult: patch\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<input type=\\"hidden\\" name=\\"done\\" value={todo.done ? '' : 'true'} />\\n\\t\\t\\t\\t<button class=\\"toggle\\" aria-label=\\"Mark todo as {todo.done ? 'not done' : 'done'}\\" />\\n\\t\\t\\t</form>\\n\\n\\t\\t\\t<form\\n\\t\\t\\t\\tclass=\\"text\\"\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=patch\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tresult: patch\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<input aria-label=\\"Edit todo\\" type=\\"text\\" name=\\"text\\" value={todo.text} />\\n\\t\\t\\t\\t<button class=\\"save\\" aria-label=\\"Save todo\\" />\\n\\t\\t\\t</form>\\n\\n\\t\\t\\t<form\\n\\t\\t\\t\\taction=\\"/todos/{todo.uid}.json?_method=delete\\"\\n\\t\\t\\t\\tmethod=\\"post\\"\\n\\t\\t\\t\\tuse:enhance={{\\n\\t\\t\\t\\t\\tresult: () => {\\n\\t\\t\\t\\t\\t\\ttodos = todos.filter((t) => t.uid !== todo.uid);\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t}}\\n\\t\\t\\t>\\n\\t\\t\\t\\t<button class=\\"delete\\" aria-label=\\"Delete todo\\" />\\n\\t\\t\\t</form>\\n\\t\\t</div>\\n\\t{/each}\\n</div>\\n\\n<style>.todos {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n  line-height: 1;\\n}\\n\\n.new {\\n  margin: 0 0 0.5rem 0;\\n}\\n\\ninput {\\n  border: 1px solid transparent;\\n}\\n\\ninput:focus-visible {\\n  box-shadow: inset 1px 1px 6px rgba(0, 0, 0, 0.1);\\n  border: 1px solid #ff3e00 !important;\\n  outline: none;\\n}\\n\\n.new input {\\n  font-size: 28px;\\n  width: 100%;\\n  padding: 0.5em 1em 0.3em 1em;\\n  box-sizing: border-box;\\n  background: rgba(255, 255, 255, 0.05);\\n  border-radius: 8px;\\n  text-align: center;\\n}\\n\\n.todo {\\n  display: grid;\\n  grid-template-columns: 2rem 1fr 2rem;\\n  grid-gap: 0.5rem;\\n  align-items: center;\\n  margin: 0 0 0.5rem 0;\\n  padding: 0.5rem;\\n  background-color: white;\\n  border-radius: 8px;\\n  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));\\n  transform: translate(-1px, -1px);\\n  transition: filter 0.2s, transform 0.2s;\\n}\\n\\n.done {\\n  transform: none;\\n  opacity: 0.4;\\n  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));\\n}\\n\\nform.text {\\n  position: relative;\\n  display: flex;\\n  align-items: center;\\n  flex: 1;\\n}\\n\\n.todo input {\\n  flex: 1;\\n  padding: 0.5em 2em 0.5em 0.8em;\\n  border-radius: 3px;\\n}\\n\\n.todo button {\\n  width: 2em;\\n  height: 2em;\\n  border: none;\\n  background-color: transparent;\\n  background-position: 50% 50%;\\n  background-repeat: no-repeat;\\n}\\n\\nbutton.toggle {\\n  border: 1px solid rgba(0, 0, 0, 0.2);\\n  border-radius: 50%;\\n  box-sizing: border-box;\\n  background-size: 1em auto;\\n}\\n\\n.done .toggle {\\n  background-image: url(\\"data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\\");\\n}\\n\\n.delete {\\n  background-image: url(\\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 5V22H19.5V5H4.5Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M10 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 10V16.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 5H22' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5L9.6445 2H14.3885L16 5H8Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E%0A\\");\\n  opacity: 0.2;\\n}\\n\\n.delete:hover,\\n\\t.delete:focus {\\n  transition: opacity 0.2s;\\n  opacity: 1;\\n}\\n\\n.save {\\n  position: absolute;\\n  right: 0;\\n  opacity: 0;\\n  background-image: url(\\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 2H3.5C2.67158 2 2 2.67157 2 3.5V20.5C2 21.3284 2.67158 22 3.5 22H20.5C21.3284 22 22 21.3284 22 20.5V3.5C22 2.67157 21.3284 2 20.5 2Z' fill='%23676778' stroke='%23676778' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M17 2V11H7.5V2H17Z' fill='white' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M13.5 5.5V7.5' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M5.99844 2H18.4992' stroke='%23676778' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E%0A\\");\\n}\\n\\n.todo input:focus + .save,\\n\\t.save:focus {\\n  transition: opacity 0.2s;\\n  opacity: 1;\\n}</style>\\n"],"names":[],"mappings":"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"}`
-};
-var __awaiter = function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve2) {
-      resolve2(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve2, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result) {
-      result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-var load = ({ fetch: fetch22 }) => __awaiter(void 0, void 0, void 0, function* () {
-  const res = yield fetch22("/todos.json");
-  if (res.ok) {
-    const todos = yield res.json();
-    return { props: { todos } };
-  }
-  const { message } = yield res.json();
-  return { error: new Error(message) };
-});
-var Todos = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  (function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve2) {
-        resolve2(value);
-      });
-    }
-    return new (P || (P = Promise))(function(resolve2, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function step(result) {
-        result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  });
-  let { todos } = $$props;
-  if ($$props.todos === void 0 && $$bindings.todos && todos !== void 0)
-    $$bindings.todos(todos);
-  $$result.css.add(css);
-  return `${$$result.head += `${$$result.title = `<title>Todos</title>`, ""}`, ""}
-
-<div class="${"todos svelte-1hyunuh"}"><h1>Todos</h1>
-
-	<form class="${"new svelte-1hyunuh"}" action="${"/todos.json"}" method="${"post"}"><input name="${"text"}" aria-label="${"Add todo"}" placeholder="${"+ tap to add a todo"}" class="${"svelte-1hyunuh"}"></form>
-
-	${each(todos, (todo) => `<div class="${["todo svelte-1hyunuh", todo.done ? "done" : ""].join(" ").trim()}"><form action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input type="${"hidden"}" name="${"done"}"${add_attribute("value", todo.done ? "" : "true", 0)} class="${"svelte-1hyunuh"}">
-				<button class="${"toggle svelte-1hyunuh"}" aria-label="${"Mark todo as " + escape2(todo.done ? "not done" : "done")}"></button></form>
-
-			<form class="${"text svelte-1hyunuh"}" action="${"/todos/" + escape2(todo.uid) + ".json?_method=patch"}" method="${"post"}"><input aria-label="${"Edit todo"}" type="${"text"}" name="${"text"}"${add_attribute("value", todo.text, 0)} class="${"svelte-1hyunuh"}">
-				<button class="${"save svelte-1hyunuh"}" aria-label="${"Save todo"}"></button></form>
-
-			<form action="${"/todos/" + escape2(todo.uid) + ".json?_method=delete"}" method="${"post"}"><button class="${"delete svelte-1hyunuh"}" aria-label="${"Delete todo"}"></button></form>
-		</div>`)}
-</div>`;
-});
-var index = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": Todos,
-  load
 });
 
 // .svelte-kit/netlify/entry.js
@@ -3164,17 +2988,3 @@ async function handler(event) {
  * Copyright(c) 2015 Douglas Christopher Wilson
  * MIT Licensed
  */
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
