@@ -2628,9 +2628,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-c15b0cb0.js",
+      file: "/./_app/start-2f3e358d.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-c15b0cb0.js", "/./_app/chunks/vendor-aa005325.js"]
+      js: ["/./_app/start-2f3e358d.js", "/./_app/chunks/vendor-aa005325.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2715,7 +2715,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-03a17373.js", "css": ["/./_app/assets/pages/__layout.svelte-d4718d75.css"], "js": ["/./_app/pages/__layout.svelte-03a17373.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-3d114cf6.js", "css": [], "js": ["/./_app/error.svelte-3d114cf6.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-70f600bb.js", "css": [], "js": ["/./_app/pages/index.svelte-70f600bb.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-babc6a3b.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-babc6a3b.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4e577bb6.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-4e577bb6.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-3338f5c0.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/faq.svelte-3338f5c0.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-1bd4b234.js", "css": ["/./_app/assets/pages/__layout.svelte-d4718d75.css"], "js": ["/./_app/pages/__layout.svelte-1bd4b234.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-3d114cf6.js", "css": [], "js": ["/./_app/error.svelte-3d114cf6.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-70f600bb.js", "css": [], "js": ["/./_app/pages/index.svelte-70f600bb.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-babc6a3b.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-babc6a3b.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4e577bb6.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-4e577bb6.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-3338f5c0.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/faq.svelte-3338f5c0.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2760,7 +2760,7 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<header class="${"container mx-auto flex"}"><div class="${"logo"}"><a class="${"p-4"}" href="${"/"}">KraussLaw</a></div>
 	<nav><ul class="${"flex justify-start uppercase"}"><li class="${["inline-block", $page.path === "/" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/"}">Home</a></li>
 			<li class="${["inline-block", $page.path === "/about" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/about"}">About</a></li>
-			<li class="${["inline-block", $page.path === "/faq" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/todos"}">Frequently Asked Questions</a></li>
+			<li class="${["inline-block", $page.path === "/faq" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/faq"}">Frequently Asked Questions</a></li>
 			<li class="${["inline-block", $page.path === "/contact" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/contact"}">Contact</a></li></ul></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
