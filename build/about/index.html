@@ -10,28 +10,22 @@
 		
 
 		<link rel="stylesheet" href="/./_app/assets/start-230d6437.css">
-		<link rel="stylesheet" href="/./_app/assets/pages/__layout.svelte-1ea082ae.css">
+		<link rel="stylesheet" href="/./_app/assets/pages/__layout.svelte-8956fd6a.css">
 		<link rel="stylesheet" href="/./_app/assets/pages/contact.svelte-ee223be2.css">
 
 		
 	</head>
-	<body>
+	<body class="bg-gray-800">
 		<div id="svelte">
 
 
-<header class="svelte-u06xnb"><div class="corner svelte-u06xnb"><a href="https://kit.svelte.dev" class="svelte-u06xnb"><img src="/_app/assets/svelte-logo.87df40b8.svg" alt="SvelteKit" class="svelte-u06xnb"></a></div>
+<header class="container mx-auto flex"><div class="logo"><a class="p-4" href="/">KraussLaw</a></div>
+	<nav><ul class="flex justify-start uppercase"><li class="inline-block"><a class="p-4" sveltekit:prefetch href="/">Home</a></li>
+	<li class="inline-block active"><a class="p-4" sveltekit:prefetch href="/about">About</a></li>
+	<li class="inline-block"><a class="p-4" sveltekit:prefetch href="/todos">Todos</a></li>
+	<li class="inline-block"><a class="p-4" sveltekit:prefetch href="/contact">Contact</a></li></ul></nav></header>
 
-	<nav class="svelte-u06xnb"><svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-u06xnb"><path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" class="svelte-u06xnb"></path></svg>
-<ul class="svelte-u06xnb"><li class="svelte-u06xnb"><a sveltekit:prefetch href="/" class="svelte-u06xnb">Home</a></li>
-	<li class="svelte-u06xnb active"><a sveltekit:prefetch href="/about" class="svelte-u06xnb">About</a></li>
-	<li class="svelte-u06xnb"><a sveltekit:prefetch href="/todos" class="svelte-u06xnb">Todos</a></li>
-	<li class="svelte-u06xnb"><a sveltekit:prefetch href="/contact" class="svelte-u06xnb">Contact</a></li></ul>
-<svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-u06xnb"><path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" class="svelte-u06xnb"></path></svg></nav>
-
-	<div class="corner svelte-u06xnb"></div>
-</header>
-
-<main class="svelte-1i5iwkv">
+<main>
 
 <div class="content svelte-s8amym"><h1>About this app</h1>
 
@@ -52,8 +46,15 @@ it with JavaScript disabled!
 	</p>
 </div></main>
 
-<footer class="svelte-1i5iwkv"><p>visit <a href="https://kit.svelte.dev" class="svelte-1i5iwkv">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+<footer><div class="container mx-auto grid grid-cols-3 gap-4"><div><a class="block" href="/about/">About</a>
+	<a class="block" href="/faq/">Frequently Asked Questions</a>
+	<a class="block" href="/contact/">Contact</a></div>
+<div><p>Test address<br>
+	1234 N. test address drive<br>
+	tucson, arizona 12345</p></div>
+<div><a class="block" href="#">Facebook</a> 
+	<a class="block" href="#">Instagram</a>
+	<a class="block" href="#">Linkedin</a></div></div></footer>
 
 
 

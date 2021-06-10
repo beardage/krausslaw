@@ -2341,9 +2341,6 @@ function run_all(fns) {
 function is_function(thing) {
   return typeof thing === "function";
 }
-function safe_not_equal2(a, b) {
-  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
-}
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -2354,33 +2351,7 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-var is_client = typeof window !== "undefined";
-var now = is_client ? () => window.performance.now() : () => Date.now();
-var raf = is_client ? (cb) => requestAnimationFrame(cb) : noop2;
 var tasks = new Set();
-function run_tasks(now2) {
-  tasks.forEach((task) => {
-    if (!task.c(now2)) {
-      tasks.delete(task);
-      task.f();
-    }
-  });
-  if (tasks.size !== 0)
-    raf(run_tasks);
-}
-function loop(callback) {
-  let task;
-  if (tasks.size === 0)
-    raf(run_tasks);
-  return {
-    promise: new Promise((fulfill) => {
-      tasks.add(task = { c: callback, f: fulfill });
-    }),
-    abort() {
-      tasks.delete(task);
-    }
-  };
-}
 var active_docs = new Set();
 var current_component;
 function set_current_component(component) {
@@ -2585,155 +2556,8 @@ function v4() {
   return out;
 }
 
-// node_modules/svelte/store/index.mjs
-var subscriber_queue2 = [];
-function writable2(value, start = noop2) {
-  let stop;
-  const subscribers = [];
-  function set(new_value) {
-    if (safe_not_equal2(value, new_value)) {
-      value = new_value;
-      if (stop) {
-        const run_queue = !subscriber_queue2.length;
-        for (let i = 0; i < subscribers.length; i += 1) {
-          const s2 = subscribers[i];
-          s2[1]();
-          subscriber_queue2.push(s2, value);
-        }
-        if (run_queue) {
-          for (let i = 0; i < subscriber_queue2.length; i += 2) {
-            subscriber_queue2[i][0](subscriber_queue2[i + 1]);
-          }
-          subscriber_queue2.length = 0;
-        }
-      }
-    }
-  }
-  function update(fn) {
-    set(fn(value));
-  }
-  function subscribe2(run2, invalidate = noop2) {
-    const subscriber = [run2, invalidate];
-    subscribers.push(subscriber);
-    if (subscribers.length === 1) {
-      stop = start(set) || noop2;
-    }
-    run2(value);
-    return () => {
-      const index2 = subscribers.indexOf(subscriber);
-      if (index2 !== -1) {
-        subscribers.splice(index2, 1);
-      }
-      if (subscribers.length === 0) {
-        stop();
-        stop = null;
-      }
-    };
-  }
-  return { set, update, subscribe: subscribe2 };
-}
-
-// node_modules/svelte/motion/index.mjs
-function is_date(obj) {
-  return Object.prototype.toString.call(obj) === "[object Date]";
-}
-function tick_spring(ctx, last_value, current_value, target_value) {
-  if (typeof current_value === "number" || is_date(current_value)) {
-    const delta = target_value - current_value;
-    const velocity = (current_value - last_value) / (ctx.dt || 1 / 60);
-    const spring2 = ctx.opts.stiffness * delta;
-    const damper = ctx.opts.damping * velocity;
-    const acceleration = (spring2 - damper) * ctx.inv_mass;
-    const d2 = (velocity + acceleration) * ctx.dt;
-    if (Math.abs(d2) < ctx.opts.precision && Math.abs(delta) < ctx.opts.precision) {
-      return target_value;
-    } else {
-      ctx.settled = false;
-      return is_date(current_value) ? new Date(current_value.getTime() + d2) : current_value + d2;
-    }
-  } else if (Array.isArray(current_value)) {
-    return current_value.map((_, i) => tick_spring(ctx, last_value[i], current_value[i], target_value[i]));
-  } else if (typeof current_value === "object") {
-    const next_value = {};
-    for (const k in current_value) {
-      next_value[k] = tick_spring(ctx, last_value[k], current_value[k], target_value[k]);
-    }
-    return next_value;
-  } else {
-    throw new Error(`Cannot spring ${typeof current_value} values`);
-  }
-}
-function spring(value, opts = {}) {
-  const store = writable2(value);
-  const { stiffness = 0.15, damping = 0.8, precision = 0.01 } = opts;
-  let last_time;
-  let task;
-  let current_token;
-  let last_value = value;
-  let target_value = value;
-  let inv_mass = 1;
-  let inv_mass_recovery_rate = 0;
-  let cancel_task = false;
-  function set(new_value, opts2 = {}) {
-    target_value = new_value;
-    const token = current_token = {};
-    if (value == null || opts2.hard || spring2.stiffness >= 1 && spring2.damping >= 1) {
-      cancel_task = true;
-      last_time = now();
-      last_value = new_value;
-      store.set(value = target_value);
-      return Promise.resolve();
-    } else if (opts2.soft) {
-      const rate = opts2.soft === true ? 0.5 : +opts2.soft;
-      inv_mass_recovery_rate = 1 / (rate * 60);
-      inv_mass = 0;
-    }
-    if (!task) {
-      last_time = now();
-      cancel_task = false;
-      task = loop((now2) => {
-        if (cancel_task) {
-          cancel_task = false;
-          task = null;
-          return false;
-        }
-        inv_mass = Math.min(inv_mass + inv_mass_recovery_rate, 1);
-        const ctx = {
-          inv_mass,
-          opts: spring2,
-          settled: true,
-          dt: (now2 - last_time) * 60 / 1e3
-        };
-        const next_value = tick_spring(ctx, last_value, value, target_value);
-        last_time = now2;
-        last_value = value;
-        store.set(value = next_value);
-        if (ctx.settled) {
-          task = null;
-        }
-        return !ctx.settled;
-      });
-    }
-    return new Promise((fulfil) => {
-      task.promise.then(() => {
-        if (token === current_token)
-          fulfil();
-      });
-    });
-  }
-  const spring2 = {
-    set,
-    update: (fn, opts2) => set(fn(target_value, value), opts2),
-    subscribe: store.subscribe,
-    stiffness,
-    damping,
-    precision
-  };
-  return spring2;
-}
-
 // .svelte-kit/output/server/app.js
-var css$7 = {
+var css$3 = {
   code: "#svelte-announcer.svelte-qsqr7k{position:absolute;left:0;top:0;clip:rect(0 0 0 0);-webkit-clip-path:inset(50%);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}",
   map: `{"version":3,"file":"root.svelte","sources":["root.svelte"],"sourcesContent":["<!-- This file is generated by @sveltejs/kit \u2014 do not edit it! -->\\n<script>\\n\\timport { setContext, afterUpdate, onMount } from 'svelte';\\n\\n\\t// stores\\n\\texport let stores;\\n\\texport let page;\\n\\n\\texport let components;\\n\\texport let props_0 = null;\\n\\texport let props_1 = null;\\n\\texport let props_2 = null;\\n\\n\\tsetContext('__svelte__', stores);\\n\\n\\t$: stores.page.set(page);\\n\\tafterUpdate(stores.page.notify);\\n\\n\\tlet mounted = false;\\n\\tlet navigated = false;\\n\\tlet title = null;\\n\\n\\tonMount(() => {\\n\\t\\tconst unsubscribe = stores.page.subscribe(() => {\\n\\t\\t\\tif (mounted) {\\n\\t\\t\\t\\tnavigated = true;\\n\\t\\t\\t\\ttitle = document.title || 'untitled page';\\n\\t\\t\\t}\\n\\t\\t});\\n\\n\\t\\tmounted = true;\\n\\t\\treturn unsubscribe;\\n\\t});\\n<\/script>\\n\\n<svelte:component this={components[0]} {...(props_0 || {})}>\\n\\t{#if components[1]}\\n\\t\\t<svelte:component this={components[1]} {...(props_1 || {})}>\\n\\t\\t\\t{#if components[2]}\\n\\t\\t\\t\\t<svelte:component this={components[2]} {...(props_2 || {})}/>\\n\\t\\t\\t{/if}\\n\\t\\t</svelte:component>\\n\\t{/if}\\n</svelte:component>\\n\\n{#if mounted}\\n\\t<div id=\\"svelte-announcer\\" aria-live=\\"assertive\\" aria-atomic=\\"true\\">\\n\\t\\t{#if navigated}\\n\\t\\t\\t{title}\\n\\t\\t{/if}\\n\\t</div>\\n{/if}\\n\\n<style>#svelte-announcer {\\n  position: absolute;\\n  left: 0;\\n  top: 0;\\n  clip: rect(0 0 0 0);\\n  -webkit-clip-path: inset(50%);\\n          clip-path: inset(50%);\\n  overflow: hidden;\\n  white-space: nowrap;\\n  width: 1px;\\n  height: 1px;\\n}</style>"],"names":[],"mappings":"AAqDO,iBAAiB,cAAC,CAAC,AACxB,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,CAAC,CACP,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACnB,iBAAiB,CAAE,MAAM,GAAG,CAAC,CACrB,SAAS,CAAE,MAAM,GAAG,CAAC,CAC7B,QAAQ,CAAE,MAAM,CAChB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACb,CAAC"}`
 };
@@ -2771,7 +2595,7 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.props_1(props_1);
   if ($$props.props_2 === void 0 && $$bindings.props_2 && props_2 !== void 0)
     $$bindings.props_2(props_2);
-  $$result.css.add(css$7);
+  $$result.css.add(css$3);
   {
     stores.page.set(page2);
   }
@@ -2807,7 +2631,7 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   [Symbol.toStringTag]: "Module",
   handle
 });
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body>\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body class="bg-gray-800">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
 var options = null;
 function init(settings) {
   set_paths(settings.paths);
@@ -2816,9 +2640,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-67835b1e.js",
+      file: "/./_app/start-b29e40e1.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-67835b1e.js", "/./_app/chunks/vendor-5f20a585.js"]
+      js: ["/./_app/start-b29e40e1.js", "/./_app/chunks/vendor-7f4bcc7a.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2920,7 +2744,7 @@ var module_lookup = {
     return index;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-aeb8e342.js", "css": ["/./_app/assets/pages/__layout.svelte-1ea082ae.css"], "js": ["/./_app/pages/__layout.svelte-aeb8e342.js", "/./_app/chunks/vendor-5f20a585.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-6c10b932.js", "css": [], "js": ["/./_app/error.svelte-6c10b932.js", "/./_app/chunks/vendor-5f20a585.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-e3ad2811.js", "css": ["/./_app/assets/pages/index.svelte-4b0d053d.css"], "js": ["/./_app/pages/index.svelte-e3ad2811.js", "/./_app/chunks/vendor-5f20a585.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-694895a8.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-694895a8.js", "/./_app/chunks/vendor-5f20a585.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-c1ef439a.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-c1ef439a.js", "/./_app/chunks/vendor-5f20a585.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/todos/index.svelte": { "entry": "/./_app/pages/todos/index.svelte-1f3f0cb7.js", "css": ["/./_app/assets/pages/todos/index.svelte-f4d9bf4b.css"], "js": ["/./_app/pages/todos/index.svelte-1f3f0cb7.js", "/./_app/chunks/vendor-5f20a585.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-eeb965ee.js", "css": ["/./_app/assets/pages/__layout.svelte-8956fd6a.css"], "js": ["/./_app/pages/__layout.svelte-eeb965ee.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-f5b2de1a.js", "css": [], "js": ["/./_app/error.svelte-f5b2de1a.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-98aed230.js", "css": [], "js": ["/./_app/pages/index.svelte-98aed230.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-b8c384b7.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-b8c384b7.js", "/./_app/chunks/vendor-7f4bcc7a.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-8e0e51e9.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-8e0e51e9.js", "/./_app/chunks/vendor-7f4bcc7a.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/todos/index.svelte": { "entry": "/./_app/pages/todos/index.svelte-64de7e97.js", "css": ["/./_app/assets/pages/todos/index.svelte-f4d9bf4b.css"], "js": ["/./_app/pages/todos/index.svelte-64de7e97.js", "/./_app/chunks/vendor-7f4bcc7a.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -3017,40 +2841,33 @@ var page = {
     return store.subscribe(fn);
   }
 };
-var logo = "/_app/assets/svelte-logo.87df40b8.svg";
-var css$6 = {
-  code: "header.svelte-u06xnb.svelte-u06xnb{display:flex;justify-content:space-between}.corner.svelte-u06xnb.svelte-u06xnb{width:3em;height:3em}.corner.svelte-u06xnb a.svelte-u06xnb{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.corner.svelte-u06xnb img.svelte-u06xnb{width:2em;height:2em;-o-object-fit:contain;object-fit:contain}nav.svelte-u06xnb.svelte-u06xnb{display:flex;justify-content:center;--background:rgba(255, 255, 255, 0.7)}svg.svelte-u06xnb.svelte-u06xnb{width:2em;height:3em;display:block}path.svelte-u06xnb.svelte-u06xnb{fill:var(--background)}ul.svelte-u06xnb.svelte-u06xnb{position:relative;padding:0;margin:0;height:3em;display:flex;justify-content:center;align-items:center;list-style:none;background:var(--background);background-size:contain}li.svelte-u06xnb.svelte-u06xnb{position:relative;height:100%}li.active.svelte-u06xnb.svelte-u06xnb::before{--size:6px;content:'';width:0;height:0;position:absolute;top:0;left:calc(50% - var(--size));border:var(--size) solid transparent;border-top:var(--size) solid var(--accent-color)}nav.svelte-u06xnb a.svelte-u06xnb{display:flex;height:100%;align-items:center;padding:0 1em;color:var(--heading-color);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:10%;text-decoration:none;transition:color 0.2s linear}a.svelte-u06xnb.svelte-u06xnb:hover{color:var(--accent-color)}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { page } from '$app/stores';\\nimport logo from './svelte-logo.svg';\\n<\/script>\\n\\n<header>\\n\\t<div class=\\"corner\\">\\n\\t\\t<a href=\\"https://kit.svelte.dev\\">\\n\\t\\t\\t<img src={logo} alt=\\"SvelteKit\\" />\\n\\t\\t</a>\\n\\t</div>\\n\\n\\t<nav>\\n\\t\\t<svg viewBox=\\"0 0 2 3\\" aria-hidden=\\"true\\">\\n\\t\\t\\t<path d=\\"M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z\\" />\\n\\t\\t</svg>\\n\\t\\t<ul>\\n\\t\\t\\t<li class:active={$page.path === '/'}><a sveltekit:prefetch href=\\"/\\">Home</a></li>\\n\\t\\t\\t<li class:active={$page.path === '/about'}><a sveltekit:prefetch href=\\"/about\\">About</a></li>\\n\\t\\t\\t<li class:active={$page.path === '/todos'}><a sveltekit:prefetch href=\\"/todos\\">Todos</a></li>\\n\\t\\t\\t<li class:active={$page.path === '/contact'}><a sveltekit:prefetch href=\\"/contact\\">Contact</a></li>\\n\\t\\t</ul>\\n\\t\\t<svg viewBox=\\"0 0 2 3\\" aria-hidden=\\"true\\">\\n\\t\\t\\t<path d=\\"M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z\\" />\\n\\t\\t</svg>\\n\\t</nav>\\n\\n\\t<div class=\\"corner\\">\\n\\t\\t<!-- TODO put something else here? github link? -->\\n\\t</div>\\n</header>\\n\\n<style>header {\\n  display: flex;\\n  justify-content: space-between;\\n}\\n\\n.corner {\\n  width: 3em;\\n  height: 3em;\\n}\\n\\n.corner a {\\n  display: flex;\\n  align-items: center;\\n  justify-content: center;\\n  width: 100%;\\n  height: 100%;\\n}\\n\\n.corner img {\\n  width: 2em;\\n  height: 2em;\\n  -o-object-fit: contain;\\n     object-fit: contain;\\n}\\n\\nnav {\\n  display: flex;\\n  justify-content: center;\\n  --background: rgba(255, 255, 255, 0.7);\\n}\\n\\nsvg {\\n  width: 2em;\\n  height: 3em;\\n  display: block;\\n}\\n\\npath {\\n  fill: var(--background);\\n}\\n\\nul {\\n  position: relative;\\n  padding: 0;\\n  margin: 0;\\n  height: 3em;\\n  display: flex;\\n  justify-content: center;\\n  align-items: center;\\n  list-style: none;\\n  background: var(--background);\\n  background-size: contain;\\n}\\n\\nli {\\n  position: relative;\\n  height: 100%;\\n}\\n\\nli.active::before {\\n  --size: 6px;\\n  content: '';\\n  width: 0;\\n  height: 0;\\n  position: absolute;\\n  top: 0;\\n  left: calc(50% - var(--size));\\n  border: var(--size) solid transparent;\\n  border-top: var(--size) solid var(--accent-color);\\n}\\n\\nnav a {\\n  display: flex;\\n  height: 100%;\\n  align-items: center;\\n  padding: 0 1em;\\n  color: var(--heading-color);\\n  font-weight: 700;\\n  font-size: 0.8rem;\\n  text-transform: uppercase;\\n  letter-spacing: 10%;\\n  text-decoration: none;\\n  transition: color 0.2s linear;\\n}\\n\\na:hover {\\n  color: var(--accent-color);\\n}</style>\\n"],"names":[],"mappings":"AA+BO,MAAM,4BAAC,CAAC,AACb,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,aAAa,AAChC,CAAC,AAED,OAAO,4BAAC,CAAC,AACP,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACb,CAAC,AAED,qBAAO,CAAC,CAAC,cAAC,CAAC,AACT,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,AACd,CAAC,AAED,qBAAO,CAAC,GAAG,cAAC,CAAC,AACX,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,aAAa,CAAE,OAAO,CACnB,UAAU,CAAE,OAAO,AACxB,CAAC,AAED,GAAG,4BAAC,CAAC,AACH,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,YAAY,CAAE,wBAAwB,AACxC,CAAC,AAED,GAAG,4BAAC,CAAC,AACH,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,KAAK,AAChB,CAAC,AAED,IAAI,4BAAC,CAAC,AACJ,IAAI,CAAE,IAAI,YAAY,CAAC,AACzB,CAAC,AAED,EAAE,4BAAC,CAAC,AACF,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,CAAC,CACV,MAAM,CAAE,CAAC,CACT,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,CAChB,UAAU,CAAE,IAAI,YAAY,CAAC,CAC7B,eAAe,CAAE,OAAO,AAC1B,CAAC,AAED,EAAE,4BAAC,CAAC,AACF,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,IAAI,AACd,CAAC,AAED,EAAE,mCAAO,QAAQ,AAAC,CAAC,AACjB,MAAM,CAAE,GAAG,CACX,OAAO,CAAE,EAAE,CACX,KAAK,CAAE,CAAC,CACR,MAAM,CAAE,CAAC,CACT,QAAQ,CAAE,QAAQ,CAClB,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,GAAG,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAC7B,MAAM,CAAE,IAAI,MAAM,CAAC,CAAC,KAAK,CAAC,WAAW,CACrC,UAAU,CAAE,IAAI,MAAM,CAAC,CAAC,KAAK,CAAC,IAAI,cAAc,CAAC,AACnD,CAAC,AAED,iBAAG,CAAC,CAAC,cAAC,CAAC,AACL,OAAO,CAAE,IAAI,CACb,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,MAAM,CACnB,OAAO,CAAE,CAAC,CAAC,GAAG,CACd,KAAK,CAAE,IAAI,eAAe,CAAC,CAC3B,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,MAAM,CACjB,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,GAAG,CACnB,eAAe,CAAE,IAAI,CACrB,UAAU,CAAE,KAAK,CAAC,IAAI,CAAC,MAAM,AAC/B,CAAC,AAED,6BAAC,MAAM,AAAC,CAAC,AACP,KAAK,CAAE,IAAI,cAAc,CAAC,AAC5B,CAAC"}`
-};
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$result.css.add(css$6);
   $$unsubscribe_page();
-  return `<header class="${"svelte-u06xnb"}"><div class="${"corner svelte-u06xnb"}"><a href="${"https://kit.svelte.dev"}" class="${"svelte-u06xnb"}"><img${add_attribute("src", logo, 0)} alt="${"SvelteKit"}" class="${"svelte-u06xnb"}"></a></div>
-
-	<nav class="${"svelte-u06xnb"}"><svg viewBox="${"0 0 2 3"}" aria-hidden="${"true"}" class="${"svelte-u06xnb"}"><path d="${"M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z"}" class="${"svelte-u06xnb"}"></path></svg>
-		<ul class="${"svelte-u06xnb"}"><li class="${["svelte-u06xnb", $page.path === "/" ? "active" : ""].join(" ").trim()}"><a sveltekit:prefetch href="${"/"}" class="${"svelte-u06xnb"}">Home</a></li>
-			<li class="${["svelte-u06xnb", $page.path === "/about" ? "active" : ""].join(" ").trim()}"><a sveltekit:prefetch href="${"/about"}" class="${"svelte-u06xnb"}">About</a></li>
-			<li class="${["svelte-u06xnb", $page.path === "/todos" ? "active" : ""].join(" ").trim()}"><a sveltekit:prefetch href="${"/todos"}" class="${"svelte-u06xnb"}">Todos</a></li>
-			<li class="${["svelte-u06xnb", $page.path === "/contact" ? "active" : ""].join(" ").trim()}"><a sveltekit:prefetch href="${"/contact"}" class="${"svelte-u06xnb"}">Contact</a></li></ul>
-		<svg viewBox="${"0 0 2 3"}" aria-hidden="${"true"}" class="${"svelte-u06xnb"}"><path d="${"M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z"}" class="${"svelte-u06xnb"}"></path></svg></nav>
-
-	<div class="${"corner svelte-u06xnb"}"></div>
-</header>`;
+  return `<header class="${"container mx-auto flex"}"><div class="${"logo"}"><a class="${"p-4"}" href="${"/"}">KraussLaw</a></div>
+	<nav><ul class="${"flex justify-start uppercase"}"><li class="${["inline-block", $page.path === "/" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/"}">Home</a></li>
+			<li class="${["inline-block", $page.path === "/about" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/about"}">About</a></li>
+			<li class="${["inline-block", $page.path === "/todos" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/todos"}">Todos</a></li>
+			<li class="${["inline-block", $page.path === "/contact" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/contact"}">Contact</a></li></ul></nav></header>`;
 });
-var css$5 = {
-  code: "main.svelte-1i5iwkv.svelte-1i5iwkv{flex:1;display:flex;flex-direction:column;padding:1rem;width:100%;max-width:1024px;margin:0 auto;box-sizing:border-box}footer.svelte-1i5iwkv.svelte-1i5iwkv{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px}footer.svelte-1i5iwkv a.svelte-1i5iwkv{font-weight:bold}@media(min-width: 480px){footer.svelte-1i5iwkv.svelte-1i5iwkv{padding:40px 0}}",
-  map: `{"version":3,"file":"__layout.svelte","sources":["__layout.svelte"],"sourcesContent":["<script lang=\\"ts\\">import Header from '$lib/Header/index.svelte';\\nimport '../app.css';\\n<\/script>\\n\\n<Header />\\n\\n<main>\\n\\t<slot />\\n</main>\\n\\n<footer>\\n\\t<p>visit <a href=\\"https://kit.svelte.dev\\">kit.svelte.dev</a> to learn SvelteKit</p>\\n</footer>\\n\\n<style>main {\\n  flex: 1;\\n  display: flex;\\n  flex-direction: column;\\n  padding: 1rem;\\n  width: 100%;\\n  max-width: 1024px;\\n  margin: 0 auto;\\n  box-sizing: border-box;\\n}\\n\\nfooter {\\n  display: flex;\\n  flex-direction: column;\\n  justify-content: center;\\n  align-items: center;\\n  padding: 40px;\\n}\\n\\nfooter a {\\n  font-weight: bold;\\n}\\n\\n@media (min-width: 480px) {\\n  footer {\\n    padding: 40px 0;\\n  }\\n}</style>\\n"],"names":[],"mappings":"AAcO,IAAI,8BAAC,CAAC,AACX,IAAI,CAAE,CAAC,CACP,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,IAAI,CACb,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,MAAM,CACjB,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,UAAU,CAAE,UAAU,AACxB,CAAC,AAED,MAAM,8BAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,OAAO,CAAE,IAAI,AACf,CAAC,AAED,qBAAM,CAAC,CAAC,eAAC,CAAC,AACR,WAAW,CAAE,IAAI,AACnB,CAAC,AAED,MAAM,AAAC,YAAY,KAAK,CAAC,AAAC,CAAC,AACzB,MAAM,8BAAC,CAAC,AACN,OAAO,CAAE,IAAI,CAAC,CAAC,AACjB,CAAC,AACH,CAAC"}`
-};
+var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<footer><div class="${"container mx-auto grid grid-cols-3 gap-4"}"><div><a class="${"block"}" href="${"/about/"}">About</a>
+			<a class="${"block"}" href="${"/faq/"}">Frequently Asked Questions</a>
+			<a class="${"block"}" href="${"/contact/"}">Contact</a></div>
+		<div><p>Test address<br>
+			1234 N. test address drive<br>
+			tucson, arizona 12345</p></div>
+		<div><a class="${"block"}" href="${"#"}">Facebook</a> 
+			<a class="${"block"}" href="${"#"}">Instagram</a>
+			<a class="${"block"}" href="${"#"}">Linkedin</a></div></div></footer>`;
+});
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$5);
   return `${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
 
-<main class="${"svelte-1i5iwkv"}">${slots.default ? slots.default({}) : ``}</main>
+<main>${slots.default ? slots.default({}) : ``}</main>
 
-<footer class="${"svelte-1i5iwkv"}"><p>visit <a href="${"https://kit.svelte.dev"}" class="${"svelte-1i5iwkv"}">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>`;
+${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
 });
 var __layout = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3080,52 +2897,11 @@ var error2 = /* @__PURE__ */ Object.freeze({
   "default": Error$1,
   load: load$1
 });
-var css$4 = {
-  code: ".counter.svelte-1h15l14.svelte-1h15l14{display:flex;border-top:1px solid rgba(0, 0, 0, 0.1);border-bottom:1px solid rgba(0, 0, 0, 0.1);margin:1rem 0}.counter.svelte-1h15l14 button.svelte-1h15l14{width:2em;padding:0;display:flex;align-items:center;justify-content:center;border:0;background-color:transparent;color:var(--text-color);font-size:2rem}.counter.svelte-1h15l14 button.svelte-1h15l14:hover{background-color:var(--secondary-color)}svg.svelte-1h15l14.svelte-1h15l14{width:25%;height:25%}path.svelte-1h15l14.svelte-1h15l14{vector-effect:non-scaling-stroke;stroke-width:2px;stroke:var(--text-color)}.counter-viewport.svelte-1h15l14.svelte-1h15l14{width:8em;height:4em;overflow:hidden;text-align:center;position:relative}.counter-viewport.svelte-1h15l14 strong.svelte-1h15l14{position:absolute;display:block;width:100%;height:100%;font-weight:400;color:var(--accent-color);font-size:4rem;display:flex;align-items:center;justify-content:center}.counter-digits.svelte-1h15l14.svelte-1h15l14{position:absolute;width:100%;height:100%}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { spring } from 'svelte/motion';\\nlet count = 0;\\nconst displayed_count = spring();\\n$: displayed_count.set(count);\\n$: offset = modulo($displayed_count, 1);\\nfunction modulo(n, m) {\\n    // handle negative numbers\\n    return ((n % m) + m) % m;\\n}\\n<\/script>\\n\\n<div class=\\"counter\\">\\n\\t<button on:click={() => (count -= 1)} aria-label=\\"Decrease the counter by one\\">\\n\\t\\t<svg aria-hidden=\\"true\\" viewBox=\\"0 0 1 1\\">\\n\\t\\t\\t<path d=\\"M0,0.5 L1,0.5\\" />\\n\\t\\t</svg>\\n\\t</button>\\n\\n\\t<div class=\\"counter-viewport\\">\\n\\t\\t<div class=\\"counter-digits\\" style=\\"transform: translate(0, {100 * offset}%)\\">\\n\\t\\t\\t<strong style=\\"top: -100%\\" aria-hidden=\\"true\\">{Math.floor($displayed_count + 1)}</strong>\\n\\t\\t\\t<strong>{Math.floor($displayed_count)}</strong>\\n\\t\\t</div>\\n\\t</div>\\n\\n\\t<button on:click={() => (count += 1)} aria-label=\\"Increase the counter by one\\">\\n\\t\\t<svg aria-hidden=\\"true\\" viewBox=\\"0 0 1 1\\">\\n\\t\\t\\t<path d=\\"M0,0.5 L1,0.5 M0.5,0 L0.5,1\\" />\\n\\t\\t</svg>\\n\\t</button>\\n</div>\\n\\n<style>.counter {\\n  display: flex;\\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\\n  margin: 1rem 0;\\n}\\n\\n.counter button {\\n  width: 2em;\\n  padding: 0;\\n  display: flex;\\n  align-items: center;\\n  justify-content: center;\\n  border: 0;\\n  background-color: transparent;\\n  color: var(--text-color);\\n  font-size: 2rem;\\n}\\n\\n.counter button:hover {\\n  background-color: var(--secondary-color);\\n}\\n\\nsvg {\\n  width: 25%;\\n  height: 25%;\\n}\\n\\npath {\\n  vector-effect: non-scaling-stroke;\\n  stroke-width: 2px;\\n  stroke: var(--text-color);\\n}\\n\\n.counter-viewport {\\n  width: 8em;\\n  height: 4em;\\n  overflow: hidden;\\n  text-align: center;\\n  position: relative;\\n}\\n\\n.counter-viewport strong {\\n  position: absolute;\\n  display: block;\\n  width: 100%;\\n  height: 100%;\\n  font-weight: 400;\\n  color: var(--accent-color);\\n  font-size: 4rem;\\n  display: flex;\\n  align-items: center;\\n  justify-content: center;\\n}\\n\\n.counter-digits {\\n  position: absolute;\\n  width: 100%;\\n  height: 100%;\\n}</style>\\n"],"names":[],"mappings":"AAgCO,QAAQ,8BAAC,CAAC,AACf,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CACxC,aAAa,CAAE,GAAG,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,CAC3C,MAAM,CAAE,IAAI,CAAC,CAAC,AAChB,CAAC,AAED,uBAAQ,CAAC,MAAM,eAAC,CAAC,AACf,KAAK,CAAE,GAAG,CACV,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,MAAM,CAAE,CAAC,CACT,gBAAgB,CAAE,WAAW,CAC7B,KAAK,CAAE,IAAI,YAAY,CAAC,CACxB,SAAS,CAAE,IAAI,AACjB,CAAC,AAED,uBAAQ,CAAC,qBAAM,MAAM,AAAC,CAAC,AACrB,gBAAgB,CAAE,IAAI,iBAAiB,CAAC,AAC1C,CAAC,AAED,GAAG,8BAAC,CAAC,AACH,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACb,CAAC,AAED,IAAI,8BAAC,CAAC,AACJ,aAAa,CAAE,kBAAkB,CACjC,YAAY,CAAE,GAAG,CACjB,MAAM,CAAE,IAAI,YAAY,CAAC,AAC3B,CAAC,AAED,iBAAiB,8BAAC,CAAC,AACjB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,QAAQ,CAAE,MAAM,CAChB,UAAU,CAAE,MAAM,CAClB,QAAQ,CAAE,QAAQ,AACpB,CAAC,AAED,gCAAiB,CAAC,MAAM,eAAC,CAAC,AACxB,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,KAAK,CACd,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,GAAG,CAChB,KAAK,CAAE,IAAI,cAAc,CAAC,CAC1B,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,AACzB,CAAC,AAED,eAAe,8BAAC,CAAC,AACf,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,AACd,CAAC"}`
-};
-function modulo(n, m) {
-  return (n % m + m) % m;
-}
-var Counter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let offset;
-  let $displayed_count, $$unsubscribe_displayed_count;
-  let count = 0;
-  const displayed_count = spring();
-  $$unsubscribe_displayed_count = subscribe(displayed_count, (value) => $displayed_count = value);
-  $$result.css.add(css$4);
-  {
-    displayed_count.set(count);
-  }
-  offset = modulo($displayed_count, 1);
-  $$unsubscribe_displayed_count();
-  return `<div class="${"counter svelte-1h15l14"}"><button aria-label="${"Decrease the counter by one"}" class="${"svelte-1h15l14"}"><svg aria-hidden="${"true"}" viewBox="${"0 0 1 1"}" class="${"svelte-1h15l14"}"><path d="${"M0,0.5 L1,0.5"}" class="${"svelte-1h15l14"}"></path></svg></button>
-
-	<div class="${"counter-viewport svelte-1h15l14"}"><div class="${"counter-digits svelte-1h15l14"}" style="${"transform: translate(0, " + escape2(100 * offset) + "%)"}"><strong style="${"top: -100%"}" aria-hidden="${"true"}" class="${"svelte-1h15l14"}">${escape2(Math.floor($displayed_count + 1))}</strong>
-			<strong class="${"svelte-1h15l14"}">${escape2(Math.floor($displayed_count))}</strong></div></div>
-
-	<button aria-label="${"Increase the counter by one"}" class="${"svelte-1h15l14"}"><svg aria-hidden="${"true"}" viewBox="${"0 0 1 1"}" class="${"svelte-1h15l14"}"><path d="${"M0,0.5 L1,0.5 M0.5,0 L0.5,1"}" class="${"svelte-1h15l14"}"></path></svg></button>
-</div>`;
-});
-var css$3 = {
-  code: "section.svelte-bb03n4.svelte-bb03n4{display:flex;flex-direction:column;justify-content:center;align-items:center;flex:1}h1.svelte-bb03n4.svelte-bb03n4{width:100%}.welcome.svelte-bb03n4.svelte-bb03n4{position:relative;width:100%;height:0;padding:0 0 calc(100% * 495 / 2048) 0}.welcome.svelte-bb03n4 img.svelte-bb03n4{position:absolute;width:100%;height:100%;top:0;display:block}",
-  map: `{"version":3,"file":"index.svelte","sources":["index.svelte"],"sourcesContent":["<script context=\\"module\\" lang=\\"ts\\">export const prerender = true;\\n<\/script>\\n\\n<script lang=\\"ts\\">import Counter from '$lib/Counter/index.svelte';\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>Home</title>\\n</svelte:head>\\n\\n<section>\\n\\t<h1>\\n\\t\\t<div class=\\"welcome\\">\\n\\t\\t\\t<picture>\\n\\t\\t\\t\\t<source srcset=\\"svelte-welcome.webp\\" type=\\"image/webp\\" />\\n\\t\\t\\t\\t<img src=\\"svelte-welcome.png\\" alt=\\"Welcome\\" />\\n\\t\\t\\t</picture>\\n\\t\\t</div>\\n\\n\\t\\tto your new<br />SvelteKit app\\n\\t</h1>\\n\\n\\t<h2>\\n\\t\\ttry editing <strong>src/routes/index.svelte</strong>\\n\\t</h2>\\n\\n\\t<Counter />\\n</section>\\n\\n<style>section {\\n  display: flex;\\n  flex-direction: column;\\n  justify-content: center;\\n  align-items: center;\\n  flex: 1;\\n}\\n\\nh1 {\\n  width: 100%;\\n}\\n\\n.welcome {\\n  position: relative;\\n  width: 100%;\\n  height: 0;\\n  padding: 0 0 calc(100% * 495 / 2048) 0;\\n}\\n\\n.welcome img {\\n  position: absolute;\\n  width: 100%;\\n  height: 100%;\\n  top: 0;\\n  display: block;\\n}</style>\\n"],"names":[],"mappings":"AA6BO,OAAO,4BAAC,CAAC,AACd,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,IAAI,CAAE,CAAC,AACT,CAAC,AAED,EAAE,4BAAC,CAAC,AACF,KAAK,CAAE,IAAI,AACb,CAAC,AAED,QAAQ,4BAAC,CAAC,AACR,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,CAAC,CACT,OAAO,CAAE,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,AACxC,CAAC,AAED,sBAAQ,CAAC,GAAG,cAAC,CAAC,AACZ,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,GAAG,CAAE,CAAC,CACN,OAAO,CAAE,KAAK,AAChB,CAAC"}`
-};
 var prerender$2 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$3);
-  return `${$$result.head += `${$$result.title = `<title>Home</title>`, ""}`, ""}
+  return `${$$result.head += `${$$result.title = `<title>KraussLaw - Home</title>`, ""}`, ""}
 
-<section class="${"svelte-bb03n4"}"><h1 class="${"svelte-bb03n4"}"><div class="${"welcome svelte-bb03n4"}"><picture><source srcset="${"svelte-welcome.webp"}" type="${"image/webp"}">
-				<img src="${"svelte-welcome.png"}" alt="${"Welcome"}" class="${"svelte-bb03n4"}"></picture></div>
-
-		to your new<br>SvelteKit app
-	</h1>
-
-	<h2>try editing <strong>src/routes/index.svelte</strong></h2>
-
-	${validate_component(Counter, "Counter").$$render($$result, {}, {}, {})}
-</section>`;
+<section><h1>Welcome</h1></section>`;
 });
 var index$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3163,33 +2939,34 @@ var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   });
-  return `<form class="${"w-full my-20"}"><div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full md:w-1/2 px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"firstname"}">First Name
+  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"contact-form"}" class="${"w-full my-20"}"><div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full md:w-1/2 px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"firstname"}">First Name
 			</label>
 
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}" id="${"firstname"}" type="${"text"}" placeholder="${"Jane"}">
+			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}" id="${"firstname"}" name="${"firstname"}" type="${"text"}" placeholder="${"Jane"}">
 
 			<p class="${"text-red-500 text-xs italic"}">Please fill out this field.</p></div>
 
 		<div class="${"w-full md:w-1/2 px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"lastname"}">Last Name
 			</label>
 
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"lastname"}" type="${"text"}" placeholder="${"Doe"}"></div></div>
+			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"lastname"}" name="${"lastname"}" type="${"text"}" placeholder="${"Doe"}"></div></div>
 
 	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"email"}">E-mail
 			</label>
 
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"email"}" type="${"email"}">
+			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"email"}" name="${"email"}" type="${"email"}">
 
 			<p class="${"text-gray-600 text-xs italic"}">Some tips - as long as needed</p></div></div>
 
 	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"message"}">Message
 			</label>
 
-			<textarea class="${" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"}" id="${"message"}"></textarea>
+			<textarea class="${" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"}" id="${"message"}" name="${"message"}"></textarea>
 
 			<p class="${"text-gray-600 text-xs italic"}">Re-size can be disabled by set by resize-none / resize-y / resize-x / resize
 			</p></div></div>
 
+	<input class="${"hidden"}" type="${"text"}" name="${"bot-field"}">
 	<div class="${"md:flex md:items-center"}"><div class="${"md:w-1/3"}"><button class="${"shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"}" type="${"submit"}">Send
 			</button></div>
 
