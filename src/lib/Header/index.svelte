@@ -7,21 +7,21 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex">
-        <div class="flex-shrink-0 flex items-center">
+        <div class="flex-shrink-0 flex items-center text-primary-500">
           KraussLaw
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:space-x-8 uppercase">
+        <div class="hidden sm:ml-6 sm:flex sm:space-x-8 uppercase content-end">
           <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-          <a sveltekit:prefetch href="/" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/" class="border-indigo-500 text-gray-200 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
             Home
           </a>
-          <a sveltekit:prefetch href="/about/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/about/" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
             About
           </a>
-          <a sveltekit:prefetch href="/faq" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/faq" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
             Frequently Asked Questions
           </a>
-          <a sveltekit:prefect href="/contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefect href="/contact" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
             Contact
           </a>
         </div>
