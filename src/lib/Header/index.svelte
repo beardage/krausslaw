@@ -2,18 +2,70 @@
 	import { page } from '$app/stores';
 </script>
 
-<header class="container mx-auto flex">
-	<div class="logo">
-		<a class="p-4" href="/">KraussLaw</a>
-	</div>
-	<nav>
-		<ul class="flex justify-start uppercase">
-			<li class="inline-block" class:active={$page.path === '/'}><a class="p-4" sveltekit:prefetch href="/">Home</a></li>
-			<li class="inline-block" class:active={$page.path === '/about'}><a class="p-4" sveltekit:prefetch href="/about">About</a></li>
-			<li class="inline-block" class:active={$page.path === '/faq'}><a class="p-4" sveltekit:prefetch href="/faq">Frequently Asked Questions</a></li>
-			<li class="inline-block" class:active={$page.path === '/contact'}><a class="p-4" sveltekit:prefetch href="/contact">Contact</a></li>
-		</ul>
-	</nav>
-
+<header>
+<nav class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <div class="flex-shrink-0 flex items-center">
+          KraussLaw
+        </div>
+        <div class="hidden sm:ml-6 sm:flex sm:space-x-8 uppercase">
+          <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
+          <a sveltekit:prefetch href="/" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            Home
+          </a>
+          <a sveltekit:prefetch href="/about/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            About
+          </a>
+          <a sveltekit:prefetch href="/faq" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            Frequently Asked Questions
+          </a>
+          <a sveltekit:prefect href="/contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            Contact
+          </a>
+        </div>
+      </div>
+      <div class="hidden sm:ml-6 sm:flex sm:items-center">
+      
+      </div>
+      <div class="-mr-2 flex items-center sm:hidden">
+        <!-- Mobile menu button -->
+        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <!--
+            Icon when menu is closed.
+ 
+            Heroicon name: outline/menu
+ 
+            Menu open: "hidden", Menu closed: "block"
+          -->
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!--
+            Icon when menu is open.
+ 
+            Heroicon name: outline/x
+ 
+            Menu open: "block", Menu closed: "hidden"
+          -->
+          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="pt-2 pb-3 space-y-1">
+      <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
+      <a svelte:prefetch href="/" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+      <a svelte:prefetch href="/about/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+      <a svelte:prefetch href="/faq/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Frequently Asked Questions</a>
+      <a svelte:prefetch href="/contact/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+    </div>
 </header>
 
