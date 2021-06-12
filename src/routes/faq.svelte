@@ -18,14 +18,7 @@
 	<title>Frequently Asked Questions</title>
 </svelte:head>
 
-<div class="content">
-	<h1>Frequently Asked Questions</h1>
+<div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+	<h1 class="text-gray-300 text-center text-3xl">Frequently Asked Questions</h1>
 </div>
 
-<style>
-	.content {
-		width: 100%;
-		max-width: var(--column-width);
-		margin: var(--column-margin-top) auto 0 auto;
-	}
-</style>
