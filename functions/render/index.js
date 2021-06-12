@@ -1397,7 +1397,7 @@ function writable(value, start = noop) {
   function update(fn) {
     set(fn(value));
   }
-  function subscribe2(run2, invalidate = noop) {
+  function subscribe(run2, invalidate = noop) {
     const subscriber = [run2, invalidate];
     subscribers.push(subscriber);
     if (subscribers.length === 1) {
@@ -1415,7 +1415,7 @@ function writable(value, start = noop) {
       }
     };
   }
-  return { set, update, subscribe: subscribe2 };
+  return { set, update, subscribe };
 }
 function hash(value) {
   let hash2 = 5381;
@@ -1437,7 +1437,7 @@ async function render_response({
   status,
   error: error3,
   branch,
-  page: page2
+  page
 }) {
   const css2 = new Set(options2.entry.css);
   const js = new Set(options2.entry.js);
@@ -1470,7 +1470,7 @@ async function render_response({
         navigating: writable(null),
         session
       },
-      page: page2,
+      page,
       components: branch.map(({ node }) => node.module.default)
     };
     for (let i = 0; i < branch.length; i += 1) {
@@ -1512,7 +1512,7 @@ async function render_response({
 				session: ${try_serialize($session, (error4) => {
       throw new Error(`Failed to serialize session data: ${error4.message}`);
     })},
-				host: ${page2 && page2.host ? s$1(page2.host) : "location.host"},
+				host: ${page && page.host ? s$1(page.host) : "location.host"},
 				route: ${!!page_config.router},
 				spa: ${!page_config.ssr},
 				trailing_slash: ${s$1(options2.trailing_slash)},
@@ -1523,10 +1523,10 @@ async function render_response({
 						${branch.map(({ node }) => `import(${s$1(node.entry)})`).join(",\n						")}
 					],
 					page: {
-						host: ${page2.host ? s$1(page2.host) : "location.host"}, // TODO this is redundant
-						path: ${s$1(page2.path)},
-						query: new URLSearchParams(${s$1(page2.query.toString())}),
-						params: ${s$1(page2.params)}
+						host: ${page.host ? s$1(page.host) : "location.host"}, // TODO this is redundant
+						path: ${s$1(page.path)},
+						query: new URLSearchParams(${s$1(page.query.toString())}),
+						params: ${s$1(page.params)}
 					}
 				}` : "null"}
 			});
@@ -1634,7 +1634,7 @@ async function load_node({
   options: options2,
   state,
   route,
-  page: page2,
+  page,
   node,
   $session,
   context,
@@ -1649,7 +1649,7 @@ async function load_node({
   let loaded;
   if (module2.load) {
     const load_input = {
-      page: page2,
+      page,
       get session() {
         uses_credentials = true;
         return $session;
@@ -1696,7 +1696,7 @@ async function load_node({
                 }
               });
             } else {
-              response = await fetch(`http://${page2.host}/${asset.file}`, opts);
+              response = await fetch(`http://${page.host}/${asset.file}`, opts);
             }
           }
           if (!response) {
@@ -1829,7 +1829,7 @@ function escape(str) {
 async function respond_with_error({ request, options: options2, state, $session, status, error: error3 }) {
   const default_layout = await options2.load_component(options2.manifest.layout);
   const default_error = await options2.load_component(options2.manifest.error);
-  const page2 = {
+  const page = {
     host: request.host,
     path: request.path,
     query: request.query,
@@ -1840,7 +1840,7 @@ async function respond_with_error({ request, options: options2, state, $session,
     options: options2,
     state,
     route: null,
-    page: page2,
+    page,
     node: default_layout,
     $session,
     context: {},
@@ -1854,7 +1854,7 @@ async function respond_with_error({ request, options: options2, state, $session,
       options: options2,
       state,
       route: null,
-      page: page2,
+      page,
       node: default_error,
       $session,
       context: loaded.context,
@@ -1876,7 +1876,7 @@ async function respond_with_error({ request, options: options2, state, $session,
       status,
       error: error3,
       branch,
-      page: page2
+      page
     });
   } catch (error4) {
     options2.handle_error(error4);
@@ -1890,7 +1890,7 @@ async function respond_with_error({ request, options: options2, state, $session,
 async function respond$1({ request, options: options2, state, $session, route }) {
   const match = route.pattern.exec(request.path);
   const params = route.params(match);
-  const page2 = {
+  const page = {
     host: request.host,
     path: request.path,
     query: request.query,
@@ -1940,7 +1940,7 @@ async function respond$1({ request, options: options2, state, $session, route })
               options: options2,
               state,
               route,
-              page: page2,
+              page,
               node,
               $session,
               context,
@@ -1981,7 +1981,7 @@ async function respond$1({ request, options: options2, state, $session, route })
                     options: options2,
                     state,
                     route,
-                    page: page2,
+                    page,
                     node: error_node,
                     $session,
                     context: node_loaded.context,
@@ -2028,7 +2028,7 @@ async function respond$1({ request, options: options2, state, $session, route })
       status,
       error: error3,
       branch: branch && branch.filter(Boolean),
-      page: page2
+      page
     });
   } catch (error4) {
     options2.handle_error(error4);
@@ -2344,13 +2344,6 @@ function is_function(thing) {
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
-function subscribe(store, ...callbacks) {
-  if (store == null) {
-    return noop2;
-  }
-  const unsub = store.subscribe(...callbacks);
-  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
-}
 var tasks = new Set();
 var active_docs = new Set();
 var current_component;
@@ -2370,9 +2363,6 @@ function afterUpdate(fn) {
 }
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
-}
-function getContext(key) {
-  return get_current_component().$$.context.get(key);
 }
 var resolved_promise = Promise.resolve();
 var seen_callbacks = new Set();
@@ -2545,13 +2535,13 @@ function v4() {
 }
 
 // .svelte-kit/output/server/app.js
-var css$3 = {
+var css = {
   code: "#svelte-announcer.svelte-qsqr7k{position:absolute;left:0;top:0;clip:rect(0 0 0 0);-webkit-clip-path:inset(50%);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}",
   map: `{"version":3,"file":"root.svelte","sources":["root.svelte"],"sourcesContent":["<!-- This file is generated by @sveltejs/kit \u2014 do not edit it! -->\\n<script>\\n\\timport { setContext, afterUpdate, onMount } from 'svelte';\\n\\n\\t// stores\\n\\texport let stores;\\n\\texport let page;\\n\\n\\texport let components;\\n\\texport let props_0 = null;\\n\\texport let props_1 = null;\\n\\texport let props_2 = null;\\n\\n\\tsetContext('__svelte__', stores);\\n\\n\\t$: stores.page.set(page);\\n\\tafterUpdate(stores.page.notify);\\n\\n\\tlet mounted = false;\\n\\tlet navigated = false;\\n\\tlet title = null;\\n\\n\\tonMount(() => {\\n\\t\\tconst unsubscribe = stores.page.subscribe(() => {\\n\\t\\t\\tif (mounted) {\\n\\t\\t\\t\\tnavigated = true;\\n\\t\\t\\t\\ttitle = document.title || 'untitled page';\\n\\t\\t\\t}\\n\\t\\t});\\n\\n\\t\\tmounted = true;\\n\\t\\treturn unsubscribe;\\n\\t});\\n<\/script>\\n\\n<svelte:component this={components[0]} {...(props_0 || {})}>\\n\\t{#if components[1]}\\n\\t\\t<svelte:component this={components[1]} {...(props_1 || {})}>\\n\\t\\t\\t{#if components[2]}\\n\\t\\t\\t\\t<svelte:component this={components[2]} {...(props_2 || {})}/>\\n\\t\\t\\t{/if}\\n\\t\\t</svelte:component>\\n\\t{/if}\\n</svelte:component>\\n\\n{#if mounted}\\n\\t<div id=\\"svelte-announcer\\" aria-live=\\"assertive\\" aria-atomic=\\"true\\">\\n\\t\\t{#if navigated}\\n\\t\\t\\t{title}\\n\\t\\t{/if}\\n\\t</div>\\n{/if}\\n\\n<style>#svelte-announcer {\\n  position: absolute;\\n  left: 0;\\n  top: 0;\\n  clip: rect(0 0 0 0);\\n  -webkit-clip-path: inset(50%);\\n          clip-path: inset(50%);\\n  overflow: hidden;\\n  white-space: nowrap;\\n  width: 1px;\\n  height: 1px;\\n}</style>"],"names":[],"mappings":"AAqDO,iBAAiB,cAAC,CAAC,AACxB,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,CAAC,CACP,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACnB,iBAAiB,CAAE,MAAM,GAAG,CAAC,CACrB,SAAS,CAAE,MAAM,GAAG,CAAC,CAC7B,QAAQ,CAAE,MAAM,CAChB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,AACb,CAAC"}`
 };
 var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
-  let { page: page2 } = $$props;
+  let { page } = $$props;
   let { components } = $$props;
   let { props_0 = null } = $$props;
   let { props_1 = null } = $$props;
@@ -2573,8 +2563,8 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   });
   if ($$props.stores === void 0 && $$bindings.stores && stores !== void 0)
     $$bindings.stores(stores);
-  if ($$props.page === void 0 && $$bindings.page && page2 !== void 0)
-    $$bindings.page(page2);
+  if ($$props.page === void 0 && $$bindings.page && page !== void 0)
+    $$bindings.page(page);
   if ($$props.components === void 0 && $$bindings.components && components !== void 0)
     $$bindings.components(components);
   if ($$props.props_0 === void 0 && $$bindings.props_0 && props_0 !== void 0)
@@ -2583,9 +2573,9 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.props_1(props_1);
   if ($$props.props_2 === void 0 && $$bindings.props_2 && props_2 !== void 0)
     $$bindings.props_2(props_2);
-  $$result.css.add(css$3);
+  $$result.css.add(css);
   {
-    stores.page.set(page2);
+    stores.page.set(page);
   }
   return `
 
@@ -2619,7 +2609,7 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   [Symbol.toStringTag]: "Module",
   handle
 });
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body class="bg-gray-800">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body class="bg-gray-800 font-sans">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
 var options = null;
 function init(settings) {
   set_paths(settings.paths);
@@ -2628,9 +2618,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-2f3e358d.js",
+      file: "/./_app/start-0ac8b612.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-2f3e358d.js", "/./_app/chunks/vendor-aa005325.js"]
+      js: ["/./_app/start-0ac8b612.js", "/./_app/chunks/vendor-ea926209.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2715,7 +2705,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-1bd4b234.js", "css": ["/./_app/assets/pages/__layout.svelte-d4718d75.css"], "js": ["/./_app/pages/__layout.svelte-1bd4b234.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-3d114cf6.js", "css": [], "js": ["/./_app/error.svelte-3d114cf6.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-70f600bb.js", "css": [], "js": ["/./_app/pages/index.svelte-70f600bb.js", "/./_app/chunks/vendor-aa005325.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-babc6a3b.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/contact.svelte-babc6a3b.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4e577bb6.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/about.svelte-4e577bb6.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-3338f5c0.js", "css": ["/./_app/assets/pages/contact.svelte-ee223be2.css"], "js": ["/./_app/pages/faq.svelte-3338f5c0.js", "/./_app/chunks/vendor-aa005325.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-ada8b940.js", "css": ["/./_app/assets/pages/__layout.svelte-c6e3219c.css"], "js": ["/./_app/pages/__layout.svelte-ada8b940.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-d647646d.js", "css": [], "js": ["/./_app/error.svelte-d647646d.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-80abf42e.js", "css": [], "js": ["/./_app/pages/index.svelte-80abf42e.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-a48d6ea7.js", "css": [], "js": ["/./_app/pages/contact.svelte-a48d6ea7.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-7f9c4cc1.js", "css": [], "js": ["/./_app/pages/about.svelte-7f9c4cc1.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-74f24b49.js", "css": [], "js": ["/./_app/pages/faq.svelte-74f24b49.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2729,50 +2719,43 @@ function render(request, {
   const host = request.headers["host"];
   return respond({ ...request, host }, options, { prerender: prerender2 });
 }
-var getStores = () => {
-  const stores = getContext("__svelte__");
-  return {
-    page: {
-      subscribe: stores.page.subscribe
-    },
-    navigating: {
-      subscribe: stores.navigating.subscribe
-    },
-    get preloading() {
-      console.error("stores.preloading is deprecated; use stores.navigating instead");
-      return {
-        subscribe: stores.navigating.subscribe
-      };
-    },
-    session: stores.session
-  };
-};
-var page = {
-  subscribe(fn) {
-    const store = getStores().page;
-    return store.subscribe(fn);
-  }
-};
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $page, $$unsubscribe_page;
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
-  $$unsubscribe_page();
-  return `<header class="${"container mx-auto flex"}"><div class="${"logo"}"><a class="${"p-4"}" href="${"/"}">KraussLaw</a></div>
-	<nav><ul class="${"flex justify-start uppercase"}"><li class="${["inline-block", $page.path === "/" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/"}">Home</a></li>
-			<li class="${["inline-block", $page.path === "/about" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/about"}">About</a></li>
-			<li class="${["inline-block", $page.path === "/faq" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/faq"}">Frequently Asked Questions</a></li>
-			<li class="${["inline-block", $page.path === "/contact" ? "active" : ""].join(" ").trim()}"><a class="${"p-4"}" sveltekit:prefetch href="${"/contact"}">Contact</a></li></ul></nav></header>`;
+  return `<header><nav class="${"bg-white shadow"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex justify-between h-16"}"><div class="${"flex"}"><div class="${"flex-shrink-0 flex items-center text-primary-500"}">KraussLaw
+        </div>
+        <div class="${"hidden sm:ml-6 sm:flex sm:space-x-8 uppercase content-end"}">
+          <a sveltekit:prefetch href="${"/"}" class="${"border-indigo-500 text-gray-200 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Home
+          </a>
+          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">About
+          </a>
+          <a sveltekit:prefetch href="${"/faq"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Frequently Asked Questions
+          </a>
+          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Contact
+          </a></div></div>
+      <div class="${"hidden sm:ml-6 sm:flex sm:items-center"}"></div>
+      <div class="${"-mr-2 flex items-center sm:hidden"}">
+        <button type="${"button"}" class="${"inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"}" aria-controls="${"mobile-menu"}" aria-expanded="${"false"}"><span class="${"sr-only"}">Open main menu</span>
+          
+          <svg class="${"block h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M4 6h16M4 12h16M4 18h16"}"></path></svg>
+          
+          <svg class="${"hidden h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M6 18L18 6M6 6l12 12"}"></path></svg></button></div></div></div>
+ 
+  
+  <div class="${"sm:hidden"}" id="${"mobile-menu"}"><div class="${"pt-2 pb-3 space-y-1"}">
+      <a svelte:prefetch href="${"/"}" class="${"bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Home</a>
+      <a svelte:prefetch href="${"/about/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">About</a>
+      <a svelte:prefetch href="${"/faq/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Frequently Asked Questions</a>
+      <a svelte:prefetch href="${"/contact/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer><div class="${"container mx-auto grid grid-cols-3 gap-4"}"><div><a class="${"block"}" href="${"/about/"}">About</a>
-			<a class="${"block"}" href="${"/faq/"}">Frequently Asked Questions</a>
-			<a class="${"block"}" href="${"/contact/"}">Contact</a></div>
-		<div><p>Test address<br>
+  return `<footer><div class="${"container grid grid-cols-3 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div><a class="${"text-gray-300 block"}" href="${"/about/"}">About</a>
+			<a class="${"text-gray-300 block"}" href="${"/faq/"}">Frequently Asked Questions</a>
+			<a class="${"text-gray-300 block"}" href="${"/contact/"}">Contact</a></div>
+		<div><p class="${"text-gray-300"}">test address<br>
 			1234 N. test address drive<br>
 			tucson, arizona 12345</p></div>
-		<div><a class="${"block"}" href="${"#"}">Facebook</a> 
-			<a class="${"block"}" href="${"#"}">Instagram</a>
-			<a class="${"block"}" href="${"#"}">Linkedin</a></div></div></footer>`;
+		<div><a class="${"text-gray-300 block"}" href="${"#"}">Facebook</a> 
+			<a class="${"text-gray-300 block"}" href="${"#"}">Instagram</a>
+			<a class="${"text-gray-300 block"}" href="${"#"}">Linkedin</a></div></div></footer>`;
 });
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
@@ -2813,7 +2796,7 @@ var prerender$3 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>KraussLaw - Home</title>`, ""}`, ""}
 
-<section><h1>Welcome</h1></section>`;
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Welcome</h1></section>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -2851,26 +2834,26 @@ var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   });
-  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"contact-form"}" class="${"w-full my-20"}"><div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full md:w-1/2 px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"firstname"}">First Name
+  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"contact-form"}" class="${"w-full my-20"}"><div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full md:w-1/2 px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"firstname"}">First Name
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}" id="${"firstname"}" name="${"firstname"}" type="${"text"}" placeholder="${"Jane"}">
 
 			<p class="${"text-red-500 text-xs italic"}">Please fill out this field.</p></div>
 
-		<div class="${"w-full md:w-1/2 px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"lastname"}">Last Name
+		<div class="${"w-full md:w-1/2 px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"lastname"}">Last Name
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"lastname"}" name="${"lastname"}" type="${"text"}" placeholder="${"Doe"}"></div></div>
 
-	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"email"}">E-mail
+	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"email"}">E-mail
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"email"}" name="${"email"}" type="${"email"}">
 
 			<p class="${"text-gray-600 text-xs italic"}">Some tips - as long as needed</p></div></div>
 
-	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"}" for="${"message"}">Message
+	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"message"}">Message
 			</label>
 
 			<textarea class="${" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"}" id="${"message"}" name="${"message"}"></textarea>
@@ -2879,26 +2862,19 @@ var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			</p></div></div>
 
 	<input class="${"hidden"}" type="${"text"}" name="${"bot-field"}">
-	<div class="${"md:flex md:items-center"}"><div class="${"md:w-1/3"}"><button class="${"shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"}" type="${"submit"}">Send
+	<div class="${"md:flex md:items-center"}"><div class="${"md:w-1/3"}"><button class="${"shadow bg-primary-400 hover:bg-primary-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"}" type="${"submit"}">Send
 			</button></div>
 
-		<div class="${"md:w-2/3"}"></div></div>
-</form>`;
+		<div class="${"md:w-2/3"}"></div></div></form>`;
 });
-var css$2 = {
-  code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
-  map: `{"version":3,"file":"contact.svelte","sources":["contact.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n    \\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<script lang=\\"ts\\">import Contact from '$lib/Contact/index.svelte';\\n<\/script>\\n\\n\\n<svelte:head>\\n\\t<title>Contact</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>Contact</h1>\\n    <Contact/>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AA6BO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
-};
 var hydrate$2 = dev;
 var router$2 = browser;
 var prerender$2 = true;
 var Contact_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$2);
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
 
-<div class="${"content svelte-s8amym"}"><h1>Contact</h1>
-    ${validate_component(Contact, "Contact").$$render($$result, {}, {}, {})}
-</div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Contact</h1>
+    ${validate_component(Contact, "Contact").$$render($$result, {}, {}, {})}</div>`;
 });
 var contact = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -2908,19 +2884,13 @@ var contact = /* @__PURE__ */ Object.freeze({
   router: router$2,
   prerender: prerender$2
 });
-var css$1 = {
-  code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
-  map: `{"version":3,"file":"about.svelte","sources":["about.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>About</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>About KraussLaw</h1>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
-};
 var hydrate$1 = dev;
 var router$1 = browser;
 var prerender$1 = true;
 var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$1);
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
 
-<div class="${"content svelte-s8amym"}"><h1>About KraussLaw</h1>
-</div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">About KraussLaw</h1></div>`;
 });
 var about = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -2930,19 +2900,13 @@ var about = /* @__PURE__ */ Object.freeze({
   router: router$1,
   prerender: prerender$1
 });
-var css = {
-  code: ".content.svelte-s8amym{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
-  map: `{"version":3,"file":"faq.svelte","sources":["faq.svelte"],"sourcesContent":["<script context=\\"module\\">\\n\\timport { browser, dev } from '$app/env';\\n\\n\\t// we don't need any JS on this page, though we'll load\\n\\t// it in dev so that we get hot module replacement...\\n\\texport const hydrate = dev;\\n\\n\\t// ...but if the client-side router is already loaded\\n\\t// (i.e. we came here from elsewhere in the app), use it\\n\\texport const router = browser;\\n\\n\\t// since there's no dynamic data here, we can prerender\\n\\t// it so that it gets served as a static asset in prod\\n\\texport const prerender = true;\\n<\/script>\\n\\n<svelte:head>\\n\\t<title>Frequently Asked Questions</title>\\n</svelte:head>\\n\\n<div class=\\"content\\">\\n\\t<h1>Frequently Asked Questions</h1>\\n</div>\\n\\n<style>.content {\\n  width: 100%;\\n  max-width: var(--column-width);\\n  margin: var(--column-margin-top) auto 0 auto;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,QAAQ,cAAC,CAAC,AACf,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,cAAc,CAAC,CAC9B,MAAM,CAAE,IAAI,mBAAmB,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,AAC9C,CAAC"}`
-};
 var hydrate = dev;
 var router = browser;
 var prerender = true;
 var Faq = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css);
   return `${$$result.head += `${$$result.title = `<title>Frequently Asked Questions</title>`, ""}`, ""}
 
-<div class="${"content svelte-s8amym"}"><h1>Frequently Asked Questions</h1>
-</div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Frequently Asked Questions</h1></div>`;
 });
 var faq = /* @__PURE__ */ Object.freeze({
   __proto__: null,
