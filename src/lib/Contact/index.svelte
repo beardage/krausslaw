@@ -25,7 +25,7 @@
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 			<label
-				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
 				for="firstname">
 				First Name
 			</label>
@@ -43,7 +43,7 @@
 
 		<div class="w-full md:w-1/2 px-3">
 			<label
-				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
 				for="lastname"
 			>
 				Last Name
@@ -62,7 +62,7 @@
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full px-3">
 			<label
-				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
 				for="email"
 			>
 				E-mail
@@ -82,7 +82,7 @@
 	<div class="flex flex-wrap -mx-3 mb-6">
 		<div class="w-full px-3">
 			<label
-				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
 				for="message"
 			>
 				Message
@@ -104,7 +104,7 @@
 	<div class="md:flex md:items-center">
 		<div class="md:w-1/3">
 			<button
-				class="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+				class="shadow bg-primary-400 hover:bg-primary-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
 				type="submit">
 				Send
 			</button>
@@ -115,65 +115,4 @@
 	</div>
 </form>
 
-<style>
-	.counter {
-		display: flex;
-		border-top: 1px solid rgba(0, 0, 0, 0.1);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-		margin: 1rem 0;
-	}
 
-	.counter button {
-		width: 2em;
-		padding: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border: 0;
-		background-color: transparent;
-		color: var(--text-color);
-		font-size: 2rem;
-	}
-
-	.counter button:hover {
-		background-color: var(--secondary-color);
-	}
-
-	svg {
-		width: 25%;
-		height: 25%;
-	}
-
-	path {
-		vector-effect: non-scaling-stroke;
-		stroke-width: 2px;
-		stroke: var(--text-color);
-	}
-
-	.counter-viewport {
-		width: 8em;
-		height: 4em;
-		overflow: hidden;
-		text-align: center;
-		position: relative;
-	}
-
-	.counter-viewport strong {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-		font-weight: 400;
-		color: var(--accent-color);
-		font-size: 4rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.counter-digits {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-	}
-</style>
