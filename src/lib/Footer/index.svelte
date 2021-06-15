@@ -3,7 +3,8 @@
 		<div>
 			<a class="text-gray-300 hover:text-gray-100 block" href="/">Home</a>
 			<a class="text-gray-300 hover:text-gray-100 block" href="/about/">About</a>
-			<a class="text-gray-300 hover:text-gray-100 block" href="/faq/">Frequently Asked Questions</a>
+			<a class="text-gray-300 hover:text-gray-100 block" href="/practice-areas/">Practice Areas</a>
+			<a class="text-gray-300 hover:text-gray-100 block" href="/faq/">FAQs</a>
 			<a class="text-gray-300 hover:text-gray-100 block" href="/contact/">Contact</a>
 		</div>
 		<div> 
