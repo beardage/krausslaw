@@ -25,6 +25,15 @@
 
 <div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
 	<h1 class="text-gray-300 text-center text-3xl">Contact</h1>
-    <Contact/>
+	<div class="grid grid-cols-2 gap-4">
+		<div class="text-gray-300 my-20">
+			<p>test address<br>
+			1234 N. test address drive<br>
+			tucson, arizona 12345<br>
+			p: <a href="tel:123.123.1234">123.123.1234</a><br>
+			f: <a href="fax:321.321.4321">321.321.4321</a></p>
+		</div>
+		<Contact/>
+	</div>
 </div>
 
