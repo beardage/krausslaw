@@ -3,28 +3,27 @@
 </script>
 
 <header>
-<nav class="bg-grey-900">
+<nav class="">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 flex-grow flex-col">
-      <div class="flex flex-between justify-between pt-5 pb-5 border-b">
-        <div class="flex-shrink-0 flex items-center text-primary-500">
+      <div class="flex flex-between justify-between pt-5 pb-5 border-b border-primary-900">
+        <div class="flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl">
           KraussLaw
         </div>
         <div class="hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end">
-          <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-          <a sveltekit:prefetch href="/" class="border-indigo-500 text-gray-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+          <a sveltekit:prefetch href="/" class="text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold">
             Home
           </a>
-          <a sveltekit:prefetch href="/about/" class="border-transparent text-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/about/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             About
           </a>
-          <a sveltekit:prefetch href="/practice-areas/" class="border-transparent text-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/practice-areas/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             Practice Areas
           </a>
-          <a sveltekit:prefetch href="/faq/" class="border-transparent text-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefetch href="/faq/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             FAQs
           </a>
-          <a sveltekit:prefect href="/contact" class="border-transparent text-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+          <a sveltekit:prefect href="/contact" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             Contact
           </a>
         </div>
