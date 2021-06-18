@@ -2609,7 +2609,7 @@ var user_hooks = /* @__PURE__ */ Object.freeze({
   [Symbol.toStringTag]: "Module",
   handle
 });
-var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body class="bg-gray-800 font-sans">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<link rel="preconnect" href="https://fonts.gstatic.com" />\n		<link\n			href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Rosarivo&display=swap"\n			rel="stylesheet"\n		/>\n\n		' + head + '\n	</head>\n	<body class="bg-gray-100 font-sans font-normal">\n		<div id="svelte">' + body + "</div>\n	</body>\n</html>\n\n<style></style>\n";
 var options = null;
 function init(settings) {
   set_paths(settings.paths);
@@ -2618,9 +2618,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-0ac8b612.js",
+      file: "/./_app/start-ffbff868.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-0ac8b612.js", "/./_app/chunks/vendor-ea926209.js"]
+      js: ["/./_app/start-ffbff868.js", "/./_app/chunks/vendor-ea926209.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2660,6 +2660,13 @@ var manifest = {
     },
     {
       type: "page",
+      pattern: /^\/practice-areas\/?$/,
+      params: empty,
+      a: ["src/routes/__layout.svelte", "src/routes/practice-areas.svelte"],
+      b: [".svelte-kit/build/components/error.svelte"]
+    },
+    {
+      type: "page",
       pattern: /^\/contact\/?$/,
       params: empty,
       a: ["src/routes/__layout.svelte", "src/routes/contact.svelte"],
@@ -2695,6 +2702,9 @@ var module_lookup = {
   "src/routes/index.svelte": () => Promise.resolve().then(function() {
     return index;
   }),
+  "src/routes/practice-areas.svelte": () => Promise.resolve().then(function() {
+    return practiceAreas;
+  }),
   "src/routes/contact.svelte": () => Promise.resolve().then(function() {
     return contact;
   }),
@@ -2705,7 +2715,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-ada8b940.js", "css": ["/./_app/assets/pages/__layout.svelte-c6e3219c.css"], "js": ["/./_app/pages/__layout.svelte-ada8b940.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-d647646d.js", "css": [], "js": ["/./_app/error.svelte-d647646d.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-80abf42e.js", "css": [], "js": ["/./_app/pages/index.svelte-80abf42e.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-a48d6ea7.js", "css": [], "js": ["/./_app/pages/contact.svelte-a48d6ea7.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-7f9c4cc1.js", "css": [], "js": ["/./_app/pages/about.svelte-7f9c4cc1.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-74f24b49.js", "css": [], "js": ["/./_app/pages/faq.svelte-74f24b49.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-d19406e4.js", "css": ["/./_app/assets/pages/__layout.svelte-73c3437c.css"], "js": ["/./_app/pages/__layout.svelte-d19406e4.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-d647646d.js", "css": [], "js": ["/./_app/error.svelte-d647646d.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-aa10b593.js", "css": [], "js": ["/./_app/pages/index.svelte-aa10b593.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-18684afa.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-18684afa.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-237b4ad3.js", "css": [], "js": ["/./_app/pages/contact.svelte-237b4ad3.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-7f9c4cc1.js", "css": [], "js": ["/./_app/pages/about.svelte-7f9c4cc1.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-74f24b49.js", "css": [], "js": ["/./_app/pages/faq.svelte-74f24b49.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2720,16 +2730,17 @@ function render(request, {
   return respond({ ...request, host }, options, { prerender: prerender2 });
 }
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<header><nav class="${"bg-white shadow"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex justify-between h-16"}"><div class="${"flex"}"><div class="${"flex-shrink-0 flex items-center text-primary-500"}">KraussLaw
+  return `<header><nav class="${""}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex h-16 flex-grow flex-col"}"><div class="${"flex flex-between justify-between pt-5 pb-5 border-b border-primary-900"}"><div class="${"flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl"}">KraussLaw
         </div>
-        <div class="${"hidden sm:ml-6 sm:flex sm:space-x-8 uppercase content-end"}">
-          <a sveltekit:prefetch href="${"/"}" class="${"border-indigo-500 text-gray-200 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Home
+        <div class="${"hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
           </a>
-          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">About
+          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
           </a>
-          <a sveltekit:prefetch href="${"/faq"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Frequently Asked Questions
+          <a sveltekit:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Practice Areas
           </a>
-          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-gray-300 hover:border-gray-300 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"}">Contact
+          <a sveltekit:prefetch href="${"/faq/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">FAQs
+          </a>
+          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
           </a></div></div>
       <div class="${"hidden sm:ml-6 sm:flex sm:items-center"}"></div>
       <div class="${"-mr-2 flex items-center sm:hidden"}">
@@ -2743,19 +2754,27 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   <div class="${"sm:hidden"}" id="${"mobile-menu"}"><div class="${"pt-2 pb-3 space-y-1"}">
       <a svelte:prefetch href="${"/"}" class="${"bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Home</a>
       <a svelte:prefetch href="${"/about/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">About</a>
-      <a svelte:prefetch href="${"/faq/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Frequently Asked Questions</a>
+      <a svelte:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Practice Areas</a>
+      <a svelte:prefetch href="${"/faq/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">FAQs</a>
       <a svelte:prefetch href="${"/contact/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer><div class="${"container grid grid-cols-3 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div><a class="${"text-gray-300 block"}" href="${"/about/"}">About</a>
-			<a class="${"text-gray-300 block"}" href="${"/faq/"}">Frequently Asked Questions</a>
-			<a class="${"text-gray-300 block"}" href="${"/contact/"}">Contact</a></div>
-		<div><p class="${"text-gray-300"}">test address<br>
+  return `<footer class="${"border-t border-primary-900 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 font-semibold block"}" href="${"/"}">Home</a>
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"/about/"}">About</a>
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"/practice-areas/"}">Practice Areas</a>
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"/faq/"}">FAQs</a>
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"/contact/"}">Contact</a></div>
+		<div class="${"uppercase leading-6"}"><p class="${"text-secondary-800 font-semibold"}">test address<br>
 			1234 N. test address drive<br>
-			tucson, arizona 12345</p></div>
-		<div><a class="${"text-gray-300 block"}" href="${"#"}">Facebook</a> 
-			<a class="${"text-gray-300 block"}" href="${"#"}">Instagram</a>
-			<a class="${"text-gray-300 block"}" href="${"#"}">Linkedin</a></div></div></footer>`;
+			tucson, arizona 12345<br>
+			p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
+			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
+		<div></div>
+		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Facebook</a> 
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Instagram</a>
+			<a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Linkedin</a> 
+			<br>
+			<p class="${"text-secondary-800"}">\xA92021 KraussLaw. All Rights Reserved.</p></div></div></footer>`;
 });
 var _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
@@ -2792,20 +2811,63 @@ var error2 = /* @__PURE__ */ Object.freeze({
   "default": Error2,
   load
 });
-var prerender$3 = true;
+create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `<div class="${"block bg-secondary-800"}"><h3>faqs</h3>
+
+	test
+</div>`;
+});
+var prerender$4 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>KraussLaw - Home</title>`, ""}`, ""}
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Welcome</h1></section>`;
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
+	<h2 class="${"text-gray-800 text-left text-xl"}">If you made a mistake, I&#39;ll help you get your life back on track.</h2></section>
+
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800"}"><div class="${"grid grid-cols-2 gap-8"}"><div class="${"content-container"}"><h3 class="${"text-gray-100 text-4xl font-serif mb-4"}">Tucson Criminal Defense Attorney With Conviction</h3>
+			<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.</p>
+			<p class="${"text-gray-100 mb-4"}">Specializing in these practice areas:</p>
+			<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges
+				</li><li>Cyber Crimes
+				</li><li>Murder and Homicide
+				</li><li>Drug Crimes
+				</li><li>Sex Offenses
+				</li><li>Violent Crimes
+			</li></ul>
+			<p><a class="${"text-secondary-200"}" href="${"/practice-areas/"}">Read More about these areas of practice here</a></p></div>
+		
+		<div class="${"form-container"}">todo form goes here
+		</div></div></section>
+
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center"}">Frequently Asked Questions</h3>
+	<faqs></faqs>
+	<p>The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
+	<p><a href="${"/faq/"}">Read more frequently asked questions here.</a></p></section>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": Routes,
-  prerender: prerender$3
+  prerender: prerender$4
 });
 var browser = false;
 var dev = false;
+var hydrate$3 = dev;
+var router$3 = browser;
+var prerender$3 = true;
+var Practice_areas = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `${$$result.head += `${$$result.title = `<title>Practice Areas</title>`, ""}`, ""}
+
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Practice Areas</h1></div>`;
+});
+var practiceAreas = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  "default": Practice_areas,
+  hydrate: hydrate$3,
+  router: router$3,
+  prerender: prerender$3
+});
 var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   (function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -2874,7 +2936,12 @@ var Contact_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
 
 <div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Contact</h1>
-    ${validate_component(Contact, "Contact").$$render($$result, {}, {}, {})}</div>`;
+	<div class="${"grid grid-cols-2 gap-4"}"><div class="${"text-gray-300 my-20"}"><p>test address<br>
+			1234 N. test address drive<br>
+			tucson, arizona 12345<br>
+			p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
+			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
+		${validate_component(Contact, "Contact").$$render($$result, {}, {}, {})}</div></div>`;
 });
 var contact = /* @__PURE__ */ Object.freeze({
   __proto__: null,
