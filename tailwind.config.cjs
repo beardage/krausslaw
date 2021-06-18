@@ -9,13 +9,19 @@ module.exports = {
       current: 'currentColor',
       gray: colors.coolGray,
       amber: colors.amber,
+      teal: colors.teal,
       primary: colors.amber,
-      secondary: colors.emerald
+      secondary: colors.teal
     },
     container: {
       padding: '2rem',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        'serif': ['Rosarivo', 'serif'],
+        'sans': ['Open Sans', 'sans-serif']
+      }
+    },
   },
   variants: {
     extend: {},
