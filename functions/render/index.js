@@ -2404,6 +2404,13 @@ var escaped2 = {
 function escape2(html) {
   return String(html).replace(/["'&<>]/g, (match) => escaped2[match]);
 }
+function each(items, fn) {
+  let str = "";
+  for (let i = 0; i < items.length; i += 1) {
+    str += fn(items[i], i);
+  }
+  return str;
+}
 var missing_component = {
   $$render: () => ""
 };
@@ -2618,9 +2625,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-ffbff868.js",
+      file: "/./_app/start-f0009c43.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-ffbff868.js", "/./_app/chunks/vendor-ea926209.js"]
+      js: ["/./_app/start-f0009c43.js", "/./_app/chunks/vendor-b086fc12.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2715,7 +2722,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-d19406e4.js", "css": ["/./_app/assets/pages/__layout.svelte-73c3437c.css"], "js": ["/./_app/pages/__layout.svelte-d19406e4.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-d647646d.js", "css": [], "js": ["/./_app/error.svelte-d647646d.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-aa10b593.js", "css": [], "js": ["/./_app/pages/index.svelte-aa10b593.js", "/./_app/chunks/vendor-ea926209.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-18684afa.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-18684afa.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-237b4ad3.js", "css": [], "js": ["/./_app/pages/contact.svelte-237b4ad3.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-7f9c4cc1.js", "css": [], "js": ["/./_app/pages/about.svelte-7f9c4cc1.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-74f24b49.js", "css": [], "js": ["/./_app/pages/faq.svelte-74f24b49.js", "/./_app/chunks/vendor-ea926209.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-340784ab.js", "css": ["/./_app/assets/pages/__layout.svelte-9e11183b.css"], "js": ["/./_app/pages/__layout.svelte-340784ab.js", "/./_app/chunks/vendor-b086fc12.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-6376730c.js", "css": [], "js": ["/./_app/error.svelte-6376730c.js", "/./_app/chunks/vendor-b086fc12.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-7bff6a19.js", "css": [], "js": ["/./_app/pages/index.svelte-7bff6a19.js", "/./_app/chunks/vendor-b086fc12.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-3c653d57.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-3c653d57.js", "/./_app/chunks/vendor-b086fc12.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-c7bd054e.js", "css": [], "js": ["/./_app/pages/contact.svelte-c7bd054e.js", "/./_app/chunks/vendor-b086fc12.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-af5070ea.js", "css": [], "js": ["/./_app/pages/about.svelte-af5070ea.js", "/./_app/chunks/vendor-b086fc12.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-2e77379f.js", "css": [], "js": ["/./_app/pages/faq.svelte-2e77379f.js", "/./_app/chunks/vendor-b086fc12.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2811,11 +2818,33 @@ var error2 = /* @__PURE__ */ Object.freeze({
   "default": Error2,
   load
 });
-create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"block bg-secondary-800"}"><h3>faqs</h3>
-
-	test
-</div>`;
+var Faq$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { faq: faq2 } = $$props;
+  if ($$props.faq === void 0 && $$bindings.faq && faq2 !== void 0)
+    $$bindings.faq(faq2);
+  return `<div class="${"faq border mb-4"}"><div class="${"question text-gray-100 bg-secondary-800 p-4 cursor-pointer"}"><p>${escape2(faq2.question)}</p></div>
+	<div class="${"answer p-4"}"><p>${escape2(faq2.answer)}</p></div></div>`;
+});
+var Faqs = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let faqItems = [
+    {
+      question: "What is the difference between a misdemeanor and a felony?",
+      answer: "About 10 years"
+    },
+    {
+      question: "Do I have to testify in court?",
+      answer: "No you do not, if doing so will disadvantage you."
+    },
+    {
+      question: "I have been served with a search warrant, what should I do?",
+      answer: "You must immediately comply with the warrant, but also call legal counsel immediately."
+    },
+    {
+      question: "How do I establish a good defense strategy for my case?",
+      answer: "Find yourself a good attorney like KraussLaw."
+    }
+  ];
+  return `<div class="${"faqs block"}">${faqItems.length ? each(faqItems, (faq2) => `${validate_component(Faq$1, "Faq").$$render($$result, { faq: faq2 }, {}, {})}`) : `<p>No FAQs Available!</p>`}</div>`;
 });
 var prerender$4 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -2839,8 +2868,8 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 		<div class="${"form-container"}">todo form goes here
 		</div></div></section>
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center"}">Frequently Asked Questions</h3>
-	<faqs></faqs>
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center mb-12"}">Frequently Asked Questions</h3>
+	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}
 	<p>The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
 	<p><a href="${"/faq/"}">Read more frequently asked questions here.</a></p></section>`;
 });
