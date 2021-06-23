@@ -19,7 +19,6 @@
 			answer: "Find yourself a good attorney like KraussLaw."
 		}
 	];
-	console.log(faqItems);
 </script>
 
 <div class="faqs block">

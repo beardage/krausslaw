@@ -36,7 +36,7 @@
 </section>
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16">
-	<h3 class="text-secondary-800 text-4xl font-serif text-center">Frequently Asked Questions</h3>
+	<h3 class="text-secondary-800 text-4xl font-serif text-center mb-12">Frequently Asked Questions</h3>
 	<Faqs />
 	<p>The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
 	<p><a href="/faq/">Read more frequently asked questions here.</a></p>
