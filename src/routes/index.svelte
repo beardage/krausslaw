@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	export const prerender = true;
 	import Faqs from '$lib/FAQs/Faqs.svelte';
+	import Consultation from '$lib/Forms/Consultation.svelte';
 </script>
 
 <svelte:head>
@@ -30,7 +31,7 @@
 		</div>
 		
 		<div class="form-container">
-			todo form goes here
+			<Consultation />
 		</div>
 	</div>
 </section>
