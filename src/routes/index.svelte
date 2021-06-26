@@ -13,10 +13,10 @@
 	<h2 class="text-gray-800 text-left text-xl">If you made a mistake, I'll help you get your life back on track.</h2>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32 bg-secondary-800">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800">
 	<div class="grid grid-cols-2 gap-8">
 		<div class="content-container">
-			<h3 class="text-gray-100 text-4xl font-serif mb-4">Tucson Criminal Defense Attorney With Conviction</h3>
+			<h3 class="text-gray-100 text-4xl font-serif mb-8">Tucson Criminal Defense Attorney With Conviction</h3>
 			<p class="text-gray-100 mb-4">Representing clients all across the State of Arizona, but based in Tucson.</p>
 			<p class="text-gray-100 mb-4">Specializing in these practice areas:</p>
 			<ul class="text-gray-100 mb-4 list-disc list-inside">
