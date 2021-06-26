@@ -12,7 +12,7 @@
 	<h2 class="text-gray-800 text-left text-xl">If you made a mistake, I'll help you get your life back on track.</h2>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32 bg-secondary-800">
 	<div class="grid grid-cols-2 gap-8">
 		<div class="content-container">
 			<h3 class="text-gray-100 text-4xl font-serif mb-4">Tucson Criminal Defense Attorney With Conviction</h3>
@@ -35,11 +35,11 @@
 	</div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32">
 	<h3 class="text-secondary-800 text-4xl font-serif text-center mb-12">Frequently Asked Questions</h3>
 	<Faqs />
-	<p class="mb-8">The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
-	<p class="text-center"><a class="text-primary-800" href="/faq/">Read more frequently asked questions here.</a></p>
+	<p class="mt-8 mb-8">The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
+	<p class="text-center"><a class="text-primary-800 underline" href="/faq/">Read more frequently asked questions here.</a></p>
 </section>
 
 
