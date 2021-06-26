@@ -2625,9 +2625,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-84094b44.js",
+      file: "/./_app/start-487af33b.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-84094b44.js", "/./_app/chunks/vendor-e57ccbf0.js"]
+      js: ["/./_app/start-487af33b.js", "/./_app/chunks/vendor-9d9ce275.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2722,7 +2722,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-65d0cf49.js", "css": ["/./_app/assets/pages/__layout.svelte-e26967d3.css"], "js": ["/./_app/pages/__layout.svelte-65d0cf49.js", "/./_app/chunks/vendor-e57ccbf0.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-3cd284b1.js", "css": [], "js": ["/./_app/error.svelte-3cd284b1.js", "/./_app/chunks/vendor-e57ccbf0.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-584ba5fe.js", "css": ["/./_app/assets/pages/index.svelte-3881eef2.css"], "js": ["/./_app/pages/index.svelte-584ba5fe.js", "/./_app/chunks/vendor-e57ccbf0.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-48895d20.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-48895d20.js", "/./_app/chunks/vendor-e57ccbf0.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-da0aaeb5.js", "css": [], "js": ["/./_app/pages/contact.svelte-da0aaeb5.js", "/./_app/chunks/vendor-e57ccbf0.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-e02fb8e2.js", "css": [], "js": ["/./_app/pages/about.svelte-e02fb8e2.js", "/./_app/chunks/vendor-e57ccbf0.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-87a5eeab.js", "css": [], "js": ["/./_app/pages/faq.svelte-87a5eeab.js", "/./_app/chunks/vendor-e57ccbf0.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-7dc2537f.js", "css": ["/./_app/assets/pages/__layout.svelte-ce3edcd8.css"], "js": ["/./_app/pages/__layout.svelte-7dc2537f.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-a1d03f8c.js", "css": [], "js": ["/./_app/error.svelte-a1d03f8c.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-7004cdcd.js", "css": ["/./_app/assets/pages/index.svelte-3881eef2.css"], "js": ["/./_app/pages/index.svelte-7004cdcd.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-6a12ba80.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-6a12ba80.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-1d32c761.js", "css": [], "js": ["/./_app/pages/contact.svelte-1d32c761.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-05719fb7.js", "css": [], "js": ["/./_app/pages/about.svelte-05719fb7.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-07237a24.js", "css": [], "js": ["/./_app/pages/faq.svelte-07237a24.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2818,9 +2818,64 @@ var error2 = /* @__PURE__ */ Object.freeze({
   "default": Error2,
   load
 });
+var Consultation = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  (function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P ? value : new P(function(resolve2) {
+        resolve2(value);
+      });
+    }
+    return new (P || (P = Promise))(function(resolve2, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  });
+  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"consultation-form"}" class="${"w-full bg-gray-100 rounded p-8"}"><h4 class="${"text-center text-secondary-800 font-serif text-4xl"}">Get A Free Consultation</h4>
+	<hr class="${"mt-4 mb-4"}">
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"name"}">Name
+			</label>
+
+			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"name"}" name="${"name"}" type="${"text"}" placeholder="${"John Smith"}"></div></div>
+
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"email"}">E-mail
+
+			</label>
+
+			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"email"}" name="${"email"}" type="${"email"}" placeholder="${"johnsmith@example.com"}"></div></div>
+
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"phone"}">Phone
+			</label>
+
+			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"phone"}" name="${"phone"}" type="${"phone"}" placeholder="${"520-123-1234"}"></div></div>
+
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"message"}">Message
+			</label>
+
+			<textarea class="${" no-resize appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200 h-48 resize-none"}" id="${"message"}" name="${"message"}"></textarea></div></div>
+
+	<input class="${"hidden"}" type="${"text"}" name="${"bot-field"}">
+	<div class="${"md:flex md:items-center"}"><div class="${"w-full"}"><button class="${"w-full shadow bg-primary-700 text-gray-100 hover:bg-primary-800 focus:shadow-outline focus:outline-none font-bold px-8 py-2 rounded uppercase"}" type="${"submit"}">Submit
+			</button></div></div></form>`;
+});
 var css = {
   code: ".answer--hidden.svelte-183qm3u{max-height:0px;opacity:0;padding-top:0px;padding-bottom:0px;padding-right:1rem;padding-left:1rem;--tw-translate-y:-2.5rem}.answer--active.svelte-183qm3u{max-height:100%;opacity:1;padding:1rem;--tw-translate-y:0px}",
-  map: `{"version":3,"file":"Faq.svelte","sources":["Faq.svelte"],"sourcesContent":["<script>\\n\\texport let faq;\\n\\t\\n\\tlet active = false;\\n\\tlet activeAnswerStyle = 'block';\\t\\n\\t\\n\\tfunction toggleActive() {\\n\\t\\tactive = !active;\\t\\n\\t}\\n<\/script>\\n\\n<div class:active={active} class=\\"faq mb-4 border transition-all duration-150 ease-in-out\\">\\n\\t<div on:click={toggleActive} class=\\"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative\\">\\n\\t\\t<p>{faq.question}</p>\\n\\t\\t<div class:rotate-90={active} class=\\"indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4\\">\\n\\t\\t\\t\\t<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"16\\" height=\\"16\\" fill=\\"currentColor\\" class=\\"bi bi-chevron-right\\" viewBox=\\"0 0 16 16\\">\\n  <path fill-rule=\\"evenodd\\" d=\\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\\"/>\\n\\t\\t\\t\\t</svg>\\n\\t\\t</div>\\n\\t</div>\\n\\t<div class:answer--hidden={!active} class:answer--active={active} class=\\"answer z-10 overflow-hidden transition-all transform-gpu duration-150 ease-in-out\\">\\n\\t\\t<p class=\\"z-10\\">{faq.answer}</p>\\n\\t</div>\\n</div>\\n\\n<style>.answer--hidden {\\n  max-height: 0px;\\n  opacity: 0;\\n  padding-top: 0px;\\n  padding-bottom: 0px;\\n  padding-right: 1rem;\\n  padding-left: 1rem;\\n  --tw-translate-y: -2.5rem;\\n}\\n\\n.answer--active {\\n  max-height: 100%;\\n  opacity: 1;\\n  padding: 1rem;\\n  --tw-translate-y: 0px;\\n}</style>\\n"],"names":[],"mappings":"AAyBO,eAAe,eAAC,CAAC,AACtB,UAAU,CAAE,GAAG,CACf,OAAO,CAAE,CAAC,CACV,WAAW,CAAE,GAAG,CAChB,cAAc,CAAE,GAAG,CACnB,aAAa,CAAE,IAAI,CACnB,YAAY,CAAE,IAAI,CAClB,gBAAgB,CAAE,OAAO,AAC3B,CAAC,AAED,eAAe,eAAC,CAAC,AACf,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,gBAAgB,CAAE,GAAG,AACvB,CAAC"}`
+  map: '{"version":3,"file":"Faq.svelte","sources":["Faq.svelte"],"sourcesContent":["<script>\\n\\texport let faq;\\n\\t\\n\\tlet active = false;\\n\\t\\n\\tfunction toggleActive() {\\n\\t\\tactive = !active;\\t\\n\\t}\\n<\/script>\\n\\n<div class:active={active} class=\\"faq mb-4 transition-all duration-150 ease-in-out bg-gray-200 rounded\\">\\n\\t<div on:click={toggleActive} class=\\"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative rounded\\">\\n\\t\\t<p>{faq.question}</p>\\n\\t\\t<div class:rotate-90={active} class=\\"indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4\\">\\n\\t\\t\\t\\t<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"16\\" height=\\"16\\" fill=\\"currentColor\\" class=\\"bi bi-chevron-right\\" viewBox=\\"0 0 16 16\\">\\n\\t\\t\\t\\t\\t<path fill-rule=\\"evenodd\\" d=\\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\\"/>\\n\\t\\t\\t\\t</svg>\\n\\t\\t</div>\\n\\t</div>\\n\\t<div class:answer--hidden={!active} class:answer--active={active} class=\\"answer z-10 overflow-hidden transition-all transform-gpu duration-150 ease-in-out\\">\\n\\t\\t<p class=\\"z-10\\">{faq.answer}</p>\\n\\t</div>\\n</div>\\n\\n<style>.answer--hidden {\\n  max-height: 0px;\\n  opacity: 0;\\n  padding-top: 0px;\\n  padding-bottom: 0px;\\n  padding-right: 1rem;\\n  padding-left: 1rem;\\n  --tw-translate-y: -2.5rem;\\n}\\n\\n.answer--active {\\n  max-height: 100%;\\n  opacity: 1;\\n  padding: 1rem;\\n  --tw-translate-y: 0px;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,eAAe,eAAC,CAAC,AACtB,UAAU,CAAE,GAAG,CACf,OAAO,CAAE,CAAC,CACV,WAAW,CAAE,GAAG,CAChB,cAAc,CAAE,GAAG,CACnB,aAAa,CAAE,IAAI,CACnB,YAAY,CAAE,IAAI,CAClB,gBAAgB,CAAE,OAAO,AAC3B,CAAC,AAED,eAAe,eAAC,CAAC,AACf,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,gBAAgB,CAAE,GAAG,AACvB,CAAC"}'
 };
 var Faq$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { faq: faq2 } = $$props;
@@ -2828,9 +2883,9 @@ var Faq$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.faq(faq2);
   $$result.css.add(css);
   return `<div class="${[
-    "faq mb-4 border transition-all duration-150 ease-in-out",
+    "faq mb-4 transition-all duration-150 ease-in-out bg-gray-200 rounded",
     ""
-  ].join(" ").trim()}"><div class="${"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative"}"><p>${escape2(faq2.question)}</p>
+  ].join(" ").trim()}"><div class="${"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative rounded"}"><p>${escape2(faq2.question)}</p>
 		<div class="${[
     "indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4",
     ""
@@ -2869,7 +2924,7 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
 	<h2 class="${"text-gray-800 text-left text-xl"}">If you made a mistake, I&#39;ll help you get your life back on track.</h2></section>
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800"}"><div class="${"grid grid-cols-2 gap-8"}"><div class="${"content-container"}"><h3 class="${"text-gray-100 text-4xl font-serif mb-4"}">Tucson Criminal Defense Attorney With Conviction</h3>
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800"}"><div class="${"grid grid-cols-2 gap-8"}"><div class="${"content-container"}"><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
 			<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.</p>
 			<p class="${"text-gray-100 mb-4"}">Specializing in these practice areas:</p>
 			<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges
@@ -2881,13 +2936,12 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			</li></ul>
 			<p><a class="${"text-secondary-200"}" href="${"/practice-areas/"}">Read More about these areas of practice here</a></p></div>
 		
-		<div class="${"form-container"}">todo form goes here
-		</div></div></section>
+		<div class="${"form-container"}">${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div></section>
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center mb-12"}">Frequently Asked Questions</h3>
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center mb-12"}">Frequently Asked Questions</h3>
 	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}
-	<p>The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
-	<p><a href="${"/faq/"}">Read more frequently asked questions here.</a></p></section>`;
+	<p class="${"mt-8 mb-8"}">The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
+	<p class="${"text-center"}"><a class="${"text-primary-800 underline"}" href="${"/faq/"}">Read more frequently asked questions here.</a></p></section>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
   __proto__: null,
