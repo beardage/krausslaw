@@ -14,16 +14,16 @@
           <a sveltekit:prefetch href="/" class="text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold">
             Home
           </a>
-          <a sveltekit:prefetch href="/about/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
+          <a sveltekit:prefetch href="/about/" class="border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             About
           </a>
-          <a sveltekit:prefetch href="/practice-areas/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
+          <a sveltekit:prefetch href="/practice-areas/" class="border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             Practice Areas
           </a>
-          <a sveltekit:prefetch href="/faq/" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
+          <a sveltekit:prefetch href="/faq/" class="border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             FAQs
           </a>
-          <a sveltekit:prefect href="/contact" class="border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
+          <a sveltekit:prefect href="/contact" class="border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold">
             Contact
           </a>
         </div>
