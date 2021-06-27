@@ -21,9 +21,9 @@
 
 </script>
 
-<form netlify netlify-honeypot="bot-field" name="consultation-form" class="w-full bg-gray-100 rounded p-8" on:submit|preventDefault={handleSubmit}>
+<form netlify netlify-honeypot="bot-field" name="consultation-form" class="w-full bg-gray-100 shadow rounded p-6" on:submit|preventDefault={handleSubmit}>
 	<h4 class="text-center text-secondary-800 font-serif text-4xl">Get A Free Consultation</h4>
-	<hr class="mt-4 mb-4">
+	<hr class="mt-2 mb-4">
 	<div class="flex flex-wrap -mx-3 mb-2">
 		<div class="w-full px-3 mb-6 md:mb-0">
 			<label

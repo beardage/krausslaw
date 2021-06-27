@@ -14,23 +14,25 @@
 </section>
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800">
-	<div class="grid grid-cols-2 gap-8">
-		<div class="content-container">
-			<h3 class="text-gray-100 text-4xl font-serif mb-8">Tucson Criminal Defense Attorney With Conviction</h3>
-			<p class="text-gray-100 mb-4">Representing clients all across the State of Arizona, but based in Tucson.</p>
-			<p class="text-gray-100 mb-4">Specializing in these practice areas:</p>
-			<ul class="text-gray-100 mb-4 list-disc list-inside">
-				<li>Gun Charges
-				<li>Cyber Crimes
-				<li>Murder and Homicide
-				<li>Drug Crimes
-				<li>Sex Offenses
-				<li>Violent Crimes
-			</ul>
-			<p><a class="text-secondary-200" href="/practice-areas/">Read More about these areas of practice here</a></p>
+	<div class="grid grid-cols-12 gap-4">
+		<div class="content-container col-span-7 flex flex-row flex-wrap content-center">
+			<div>
+				<h3 class="text-gray-100 text-4xl font-serif mb-8">Tucson Criminal Defense Attorney With Conviction</h3>
+				<p class="text-gray-100 mb-4">Representing clients all across the State of Arizona, but based in Tucson.</p>
+				<p class="text-gray-100 mb-4">Specializing in these practice areas:</p>
+				<ul class="text-gray-100 mb-4 list-disc list-inside">
+					<li>Gun Charges
+					<li>Cyber Crimes
+					<li>Murder and Homicide
+					<li>Drug Crimes
+					<li>Sex Offenses
+					<li>Violent Crimes
+				</ul>
+				<p><a class="text-secondary-200" href="/practice-areas/">Read More about these areas of practice here</a></p>
+			</div>
 		</div>
 		
-		<div class="form-container">
+		<div class="form-container col-span-5">
 			<Consultation />
 		</div>
 	</div>
