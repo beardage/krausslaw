@@ -15,7 +15,7 @@
 </script>
 
 <script lang="ts">
-    import Contact from '$lib/Contact/index.svelte';
+    import Contact from '$lib/Forms/contact.svelte';
 </script>
 
 
