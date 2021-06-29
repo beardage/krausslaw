@@ -1,5 +1,6 @@
 <script context="module">
 	import { browser, dev } from '$app/env';
+	import Faqs from '$lib/FAQs/Faqs.svelte';
 
 	// we don't need any JS on this page, though we'll load
 	// it in dev so that we get hot module replacement...
@@ -12,6 +13,7 @@
 	// since there's no dynamic data here, we can prerender
 	// it so that it gets served as a static asset in prod
 	export const prerender = true;
+	
 </script>
 
 <svelte:head>
@@ -19,6 +21,7 @@
 </svelte:head>
 
 <div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-	<h1 class="text-gray-300 text-center text-3xl">Frequently Asked Questions</h1>
+	<h1 class="text-secondary-800 text-center text-3xl font-serif mt-16 mb-16">Frequently Asked Questions</h1>
+	<Faqs />
 </div>
 
