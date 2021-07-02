@@ -43,17 +43,17 @@
 <div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
 	<h1 class="text-secondary-800 text-center text-4xl font-serif my-16">Contact</h1>
 	<div class="grid grid-cols-2 gap-4 mt-16">
-		<div class=" my-8">
+		<div class="my-4">
 			<p>test address<br>
 			1234 N. test address drive<br>
 			tucson, arizona 12345<br>
 			p: <a href="tel:123.123.1234">123.123.1234</a><br>
 			f: <a href="fax:321.321.4321">321.321.4321</a></p>
+			{ #if ready }
+				<Location />
+			{ /if }
 		</div>
 		<Consultation/>
 	</div>
-	{ #if ready }
-		<Location />
-	{ /if }
 </div>
 

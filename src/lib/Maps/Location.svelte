@@ -191,6 +191,6 @@
 
 </script>
 
-<div class="map full-w h-40" bind:this={container}></div>
+<div class="map full-w mt-8 mr-8 h-96" bind:this={container}></div>
 
 
