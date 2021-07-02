@@ -2457,6 +2457,11 @@ function create_ssr_component(fn) {
     $$render
   };
 }
+function add_attribute(name, value, boolean) {
+  if (value == null || boolean && !value)
+    return "";
+  return ` ${name}${value === true ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
+}
 function destroy_component(component, detaching) {
   const $$ = component.$$;
   if ($$.fragment !== null) {
@@ -2625,9 +2630,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-487af33b.js",
+      file: "/./_app/start-23d6a93f.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-487af33b.js", "/./_app/chunks/vendor-9d9ce275.js"]
+      js: ["/./_app/start-23d6a93f.js", "/./_app/chunks/vendor-dab8e6e1.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2722,7 +2727,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-7dc2537f.js", "css": ["/./_app/assets/pages/__layout.svelte-ce3edcd8.css"], "js": ["/./_app/pages/__layout.svelte-7dc2537f.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-a1d03f8c.js", "css": [], "js": ["/./_app/error.svelte-a1d03f8c.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-7004cdcd.js", "css": ["/./_app/assets/pages/index.svelte-3881eef2.css"], "js": ["/./_app/pages/index.svelte-7004cdcd.js", "/./_app/chunks/vendor-9d9ce275.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-6a12ba80.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-6a12ba80.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-1d32c761.js", "css": [], "js": ["/./_app/pages/contact.svelte-1d32c761.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-05719fb7.js", "css": [], "js": ["/./_app/pages/about.svelte-05719fb7.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-07237a24.js", "css": [], "js": ["/./_app/pages/faq.svelte-07237a24.js", "/./_app/chunks/vendor-9d9ce275.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-e2c2bc56.js", "css": ["/./_app/assets/pages/__layout.svelte-a27142f9.css"], "js": ["/./_app/pages/__layout.svelte-e2c2bc56.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-05945fca.js", "css": [], "js": ["/./_app/error.svelte-05945fca.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-3800b4ec.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-3800b4ec.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Consultation-1ab77ab7.js", "/./_app/chunks/Faqs-9119adcb.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-cd0630e6.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-cd0630e6.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-69a67b8d.js", "css": [], "js": ["/./_app/pages/contact.svelte-69a67b8d.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-1ab77ab7.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-3ce52bb9.js", "css": [], "js": ["/./_app/pages/about.svelte-3ce52bb9.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-8a97ae67.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-8a97ae67.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Faqs-9119adcb.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2741,13 +2746,13 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
         </div>
         <div class="${"hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
           </a>
-          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
+          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
           </a>
-          <a sveltekit:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Practice Areas
+          <a sveltekit:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Practice Areas
           </a>
-          <a sveltekit:prefetch href="${"/faq/"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">FAQs
+          <a sveltekit:prefetch href="${"/faq/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">FAQs
           </a>
-          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-gray-100 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
+          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
           </a></div></div>
       <div class="${"hidden sm:ml-6 sm:flex sm:items-center"}"></div>
       <div class="${"-mr-2 flex items-center sm:hidden"}">
@@ -2766,20 +2771,20 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       <a svelte:prefetch href="${"/contact/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer class="${"border-t border-primary-900 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 font-semibold block"}" href="${"/"}">Home</a>
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"/about/"}">About</a>
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"/practice-areas/"}">Practice Areas</a>
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"/faq/"}">FAQs</a>
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"/contact/"}">Contact</a></div>
+  return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/"}">Home</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/about/"}">About</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/practice-areas/"}">Practice Areas</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/faq/"}">FAQs</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/contact/"}">Contact</a></div>
 		<div class="${"uppercase leading-6"}"><p class="${"text-secondary-800 font-semibold"}">test address<br>
 			1234 N. test address drive<br>
 			tucson, arizona 12345<br>
-			p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
-			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
+			p: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"tel:123.123.1234"}">123.123.1234</a><br>
+			f: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
 		<div></div>
-		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Facebook</a> 
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Instagram</a>
-			<a class="${"text-secondary-800 font-semibold block"}" href="${"#"}">Linkedin</a> 
+		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Facebook</a> 
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Instagram</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Linkedin</a> 
 			<br>
 			<p class="${"text-secondary-800"}">\xA92021 KraussLaw. All Rights Reserved.</p></div></div></footer>`;
 });
@@ -2846,8 +2851,8 @@ var Consultation = create_ssr_component(($$result, $$props, $$bindings, slots) =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   });
-  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"consultation-form"}" class="${"w-full bg-gray-100 rounded p-8"}"><h4 class="${"text-center text-secondary-800 font-serif text-4xl"}">Get A Free Consultation</h4>
-	<hr class="${"mt-4 mb-4"}">
+  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"consultation-form"}" class="${"w-full bg-gray-100 shadow rounded p-6"}"><h4 class="${"text-center text-secondary-800 font-serif text-4xl"}">Get A Free Consultation</h4>
+	<hr class="${"mt-2 mb-4"}">
 	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"name"}">Name
 			</label>
 
@@ -2924,19 +2929,19 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
 	<h2 class="${"text-gray-800 text-left text-xl"}">If you made a mistake, I&#39;ll help you get your life back on track.</h2></section>
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800"}"><div class="${"grid grid-cols-2 gap-8"}"><div class="${"content-container"}"><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
-			<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.</p>
-			<p class="${"text-gray-100 mb-4"}">Specializing in these practice areas:</p>
-			<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges
-				</li><li>Cyber Crimes
-				</li><li>Murder and Homicide
-				</li><li>Drug Crimes
-				</li><li>Sex Offenses
-				</li><li>Violent Crimes
-			</li></ul>
-			<p><a class="${"text-secondary-200"}" href="${"/practice-areas/"}">Read More about these areas of practice here</a></p></div>
+<section class="${"pt-16 pb-16 bg-secondary-800"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4"}"><div class="${"content-container col-span-7 flex flex-row flex-wrap content-center"}"><div><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
+				<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.</p>
+				<p class="${"text-gray-100 mb-4"}">Specializing in these practice areas:</p>
+				<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges
+					</li><li>Cyber Crimes
+					</li><li>Murder and Homicide
+					</li><li>Drug Crimes
+					</li><li>Sex Offenses
+					</li><li>Violent Crimes
+				</li></ul>
+				<p><a class="${"text-secondary-200"}" href="${"/practice-areas/"}">Read More about these areas of practice here</a></p></div></div>
 		
-		<div class="${"form-container"}">${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div></section>
+		<div class="${"form-container col-span-5"}">${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div></section>
 
 <section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center mb-12"}">Frequently Asked Questions</h3>
 	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}
@@ -2957,7 +2962,7 @@ var prerender$3 = true;
 var Practice_areas = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Practice Areas</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Practice Areas</h1></div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif my-16"}">Practice Areas</h1></div>`;
 });
 var practiceAreas = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -2967,85 +2972,151 @@ var practiceAreas = /* @__PURE__ */ Object.freeze({
   router: router$3,
   prerender: prerender$3
 });
-var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  (function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve2) {
-        resolve2(value);
-      });
+var Location = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let container;
+  let mapstyle = [
+    {
+      "elementType": "geometry",
+      "stylers": [{ "color": "#242f3e" }]
+    },
+    {
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#746855" }]
+    },
+    {
+      "elementType": "labels.text.stroke",
+      "stylers": [{ "color": "#242f3e" }]
+    },
+    {
+      "featureType": "administrative.locality",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#d59563" }]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#d59563" }]
+    },
+    {
+      "featureType": "poi.business",
+      "stylers": [{ "visibility": "off" }]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [{ "color": "#263c3f" }]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "labels.text",
+      "stylers": [{ "visibility": "off" }]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#6b9a76" }]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry",
+      "stylers": [{ "color": "#38414e" }]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry.stroke",
+      "stylers": [{ "color": "#212a37" }]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#9ca5b3" }]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [{ "color": "#746855" }]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "geometry.stroke",
+      "stylers": [{ "color": "#1f2835" }]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#f3d19c" }]
+    },
+    {
+      "featureType": "transit",
+      "elementType": "geometry",
+      "stylers": [{ "color": "#2f3948" }]
+    },
+    {
+      "featureType": "transit.station",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#d59563" }]
+    },
+    {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [{ "color": "#17263c" }]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [{ "color": "#515c6d" }]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text.stroke",
+      "stylers": [{ "color": "#17263c" }]
     }
-    return new (P || (P = Promise))(function(resolve2, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function step(result) {
-        result.done ? resolve2(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
+  ];
+  onMount(async () => {
+    new google.maps.Map(container, {
+      zoom: 15,
+      center: {
+        lat: 32.221335628018636,
+        lng: -110.97263512001568
+      },
+      styles: mapstyle
     });
   });
-  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"contact-form"}" class="${"w-full my-20"}"><div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full md:w-1/2 px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"firstname"}">First Name
-			</label>
-
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}" id="${"firstname"}" name="${"firstname"}" type="${"text"}" placeholder="${"Jane"}">
-
-			<p class="${"text-red-500 text-xs italic"}">Please fill out this field.</p></div>
-
-		<div class="${"w-full md:w-1/2 px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"lastname"}">Last Name
-			</label>
-
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"lastname"}" name="${"lastname"}" type="${"text"}" placeholder="${"Doe"}"></div></div>
-
-	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"email"}">E-mail
-			</label>
-
-			<input class="${"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}" id="${"email"}" name="${"email"}" type="${"email"}">
-
-			<p class="${"text-gray-600 text-xs italic"}">Some tips - as long as needed</p></div></div>
-
-	<div class="${"flex flex-wrap -mx-3 mb-6"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"}" for="${"message"}">Message
-			</label>
-
-			<textarea class="${" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"}" id="${"message"}" name="${"message"}"></textarea>
-
-			<p class="${"text-gray-600 text-xs italic"}">Re-size can be disabled by set by resize-none / resize-y / resize-x / resize
-			</p></div></div>
-
-	<input class="${"hidden"}" type="${"text"}" name="${"bot-field"}">
-	<div class="${"md:flex md:items-center"}"><div class="${"md:w-1/3"}"><button class="${"shadow bg-primary-400 hover:bg-primary-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"}" type="${"submit"}">Send
-			</button></div>
-
-		<div class="${"md:w-2/3"}"></div></div></form>`;
+  return `<div class="${"map full-w mt-8 mr-8 h-96"}"${add_attribute("this", container, 1)}></div>`;
 });
 var hydrate$2 = dev;
 var router$2 = browser;
 var prerender$2 = true;
-var Contact_1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let ready;
+  let gmaps;
+  onMount(() => {
+    if (typeof window.google === "undefined") {
+      gmaps = document.createElement("script");
+      gmaps.setAttribute("src", "https://maps.googleapis.com/maps/api/js?key=AIzaSyDDpO6BkB3LzPyzw4CpOnIyGZiz3xd6I_M&callback=initMap&libraries=&v=weekly");
+      document.body.appendChild(gmaps);
+    } else {
+      ready = true;
+    }
+    window.initMap = () => {
+      ready = true;
+    };
+  });
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Contact</h1>
-	<div class="${"grid grid-cols-2 gap-4"}"><div class="${"text-gray-300 my-20"}"><p>test address<br>
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">Contact</h1>
+	<div class="${"grid grid-cols-2 gap-4 mt-16"}"><div class="${"my-4"}"><p>test address<br>
 			1234 N. test address drive<br>
 			tucson, arizona 12345<br>
 			p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
-			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
-		${validate_component(Contact, "Contact").$$render($$result, {}, {}, {})}</div></div>`;
+			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p>
+			${ready ? `${validate_component(Location, "Location").$$render($$result, {}, {}, {})}` : ``}</div>
+		${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div>`;
 });
 var contact = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
-  "default": Contact_1,
+  "default": Contact,
   hydrate: hydrate$2,
   router: router$2,
   prerender: prerender$2
@@ -3056,7 +3127,7 @@ var prerender$1 = true;
 var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">About KraussLaw</h1></div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif my-16"}">About KraussLaw</h1></div>`;
 });
 var about = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3072,7 +3143,8 @@ var prerender = true;
 var Faq = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Frequently Asked Questions</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-gray-300 text-center text-3xl"}">Frequently Asked Questions</h1></div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif mt-16 mb-16"}">Frequently Asked Questions</h1>
+	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}</div>`;
 });
 var faq = /* @__PURE__ */ Object.freeze({
   __proto__: null,
