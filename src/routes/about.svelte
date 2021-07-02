@@ -19,5 +19,5 @@
 </svelte:head>
 
 <div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-	<h1 class="text-gray-300 text-center text-3xl">About KraussLaw</h1>
+	<h1 class="text-secondary-800 text-center text-3xl font-serif my-16">About KraussLaw</h1>
 </div>
