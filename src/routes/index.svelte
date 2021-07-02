@@ -13,8 +13,8 @@
 	<h2 class="text-gray-800 text-left text-xl">If you made a mistake, I'll help you get your life back on track.</h2>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 bg-secondary-800">
-	<div class="grid grid-cols-12 gap-4">
+<section class="pt-16 pb-16 bg-secondary-800">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4">
 		<div class="content-container col-span-7 flex flex-row flex-wrap content-center">
 			<div>
 				<h3 class="text-gray-100 text-4xl font-serif mb-8">Tucson Criminal Defense Attorney With Conviction</h3>
