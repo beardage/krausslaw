@@ -183,7 +183,7 @@
 
     onMount(async () => {
         map = new google.maps.Map(container, {
-            zoom: 8,
+            zoom: 15,
             center: {lat: 32.221335628018636, lng: -110.97263512001568},
             styles: mapstyle
         });
