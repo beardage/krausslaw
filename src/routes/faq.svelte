@@ -21,7 +21,7 @@
 </svelte:head>
 
 <div class="content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-	<h1 class="text-secondary-800 text-center text-3xl font-serif mt-16 mb-16">Frequently Asked Questions</h1>
+	<h1 class="text-secondary-800 text-center text-4xl font-serif mt-16 mb-16">Frequently Asked Questions</h1>
 	<Faqs />
 </div>
 
