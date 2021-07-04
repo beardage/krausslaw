@@ -1,11 +1,11 @@
 <footer class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 	<div class="container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900">
 		<div class="uppercase leading-6">
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="/">Home</a>
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="/about/">About</a>
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="/practice-areas/">Practice Areas</a>
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="/faq/">FAQs</a>
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="/contact/">Contact</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/">Home</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/about/">About</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/practice-areas/">Practice Areas</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/faq/">FAQs</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/contact/">Contact</a>
 		</div>
 		<div class="uppercase leading-6"> 
 			<p class="text-secondary-800 font-semibold">test address<br>
@@ -16,9 +16,9 @@
 		</div>
 		<div></div>
 		<div class="uppercase leading-6"> 
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="#">Facebook</a> 
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="#">Instagram</a>
-			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block" href="#">Linkedin</a> 
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="#">Facebook</a> 
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="#">Instagram</a>
+			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="#">Linkedin</a> 
 			<br>
 			<p class="text-secondary-800">©2021 KraussLaw. All Rights Reserved.</p>
 		</div>
