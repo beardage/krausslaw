@@ -1,4 +1,4 @@
-<footer class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<footer class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
 	<div class="container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900">
 		<div class="uppercase leading-6">
 			<a class="text-secondary-800 hover:text-secondary-600 font-semibold block mb-1" href="/">Home</a>
