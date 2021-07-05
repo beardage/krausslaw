@@ -2630,9 +2630,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-23d6a93f.js",
+      file: "/./_app/start-e5d5f6d5.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-23d6a93f.js", "/./_app/chunks/vendor-dab8e6e1.js"]
+      js: ["/./_app/start-e5d5f6d5.js", "/./_app/chunks/vendor-dab8e6e1.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2727,7 +2727,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-e2c2bc56.js", "css": ["/./_app/assets/pages/__layout.svelte-a27142f9.css"], "js": ["/./_app/pages/__layout.svelte-e2c2bc56.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-05945fca.js", "css": [], "js": ["/./_app/error.svelte-05945fca.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-3800b4ec.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-3800b4ec.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Consultation-1ab77ab7.js", "/./_app/chunks/Faqs-9119adcb.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-cd0630e6.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-cd0630e6.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-69a67b8d.js", "css": [], "js": ["/./_app/pages/contact.svelte-69a67b8d.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-1ab77ab7.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-3ce52bb9.js", "css": [], "js": ["/./_app/pages/about.svelte-3ce52bb9.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-8a97ae67.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-8a97ae67.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Faqs-9119adcb.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-efb08520.js", "css": ["/./_app/assets/pages/__layout.svelte-e3885eae.css"], "js": ["/./_app/pages/__layout.svelte-efb08520.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-05945fca.js", "css": [], "js": ["/./_app/error.svelte-05945fca.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-3800b4ec.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-3800b4ec.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Consultation-1ab77ab7.js", "/./_app/chunks/Faqs-9119adcb.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-a0ce3c67.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-a0ce3c67.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-20eb988b.js", "css": [], "js": ["/./_app/pages/contact.svelte-20eb988b.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-1ab77ab7.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-5d6b6c24.js", "css": [], "js": ["/./_app/pages/about.svelte-5d6b6c24.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-6f2550b2.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-6f2550b2.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Faqs-9119adcb.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2771,20 +2771,20 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       <a svelte:prefetch href="${"/contact/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/"}">Home</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/about/"}">About</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/practice-areas/"}">Practice Areas</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/faq/"}">FAQs</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"/contact/"}">Contact</a></div>
+  return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/"}">Home</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/about/"}">About</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/practice-areas/"}">Practice Areas</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/faq/"}">FAQs</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/contact/"}">Contact</a></div>
 		<div class="${"uppercase leading-6"}"><p class="${"text-secondary-800 font-semibold"}">test address<br>
 			1234 N. test address drive<br>
 			tucson, arizona 12345<br>
 			p: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"tel:123.123.1234"}">123.123.1234</a><br>
 			f: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
 		<div></div>
-		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Facebook</a> 
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Instagram</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block"}" href="${"#"}">Linkedin</a> 
+		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Facebook</a> 
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Instagram</a>
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Linkedin</a> 
 			<br>
 			<p class="${"text-secondary-800"}">\xA92021 KraussLaw. All Rights Reserved.</p></div></div></footer>`;
 });
@@ -2962,7 +2962,7 @@ var prerender$3 = true;
 var Practice_areas = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Practice Areas</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif my-16"}">Practice Areas</h1></div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">Practice Areas</h1></div>`;
 });
 var practiceAreas = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3082,7 +3082,7 @@ var Location = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       styles: mapstyle
     });
   });
-  return `<div class="${"map full-w mt-8 mr-8 h-96"}"${add_attribute("this", container, 1)}></div>`;
+  return `<div class="${"map full-w mt-16 mr-4 h-96"}"${add_attribute("this", container, 1)}></div>`;
 });
 var hydrate$2 = dev;
 var router$2 = browser;
@@ -3127,7 +3127,14 @@ var prerender$1 = true;
 var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif my-16"}">About KraussLaw</h1></div>`;
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">About KraussLaw</h1>
+	<div class="${"grid grid-cols-2 gap-8"}"><div class="${"description"}"><p class="${"mb-8"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ex ligula. Aliquam nec quam risus. Donec cursus accumsan odio, ac pulvinar nibh auctor sit amet. Phasellus a accumsan tortor. Vestibulum ullamcorper faucibus vehicula. Suspendisse nec convallis nibh. Proin ac elit ipsum. Aenean congue iaculis varius. Aliquam et placerat metus, sit amet tincidunt lectus. Morbi nibh dolor, elementum ut dolor eu, rhoncus rhoncus orci.</p>
+			<p class="${"mb-8"}">Duis finibus, enim a imperdiet porttitor, ante est scelerisque leo, eget dictum magna arcu mollis risus. Mauris cursus, nisi euismod ultrices gravida, tellus nibh rhoncus erat, a dapibus dolor purus sed augue. Phasellus congue tincidunt mauris, non dignissim est feugiat id. Praesent nisl nisl, porta non pretium nec, ullamcorper nec nulla. Aenean dapibus mattis metus, vel placerat ipsum rutrum et. Phasellus at porta nibh. Pellentesque accumsan convallis sagittis. Integer fringilla orci a volutpat pellentesque.</p>
+			<h3 class="${"text-secondary-800 font-serif text-2xl mt-8 mb-4"}">Education / Experience</h3>
+			<ul><li>thing 1</li>
+				<li>thing 2</li>
+				<li>thing 3</li></ul></div>
+		<div class="${"photo"}"><img class="${"full-w"}" src="${"https://via.placeholder.com/600x600/065F46/92400E"}"></div></div></div>`;
 });
 var about = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -3143,7 +3150,7 @@ var prerender = true;
 var Faq = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Frequently Asked Questions</title>`, ""}`, ""}
 
-<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-3xl font-serif mt-16 mb-16"}">Frequently Asked Questions</h1>
+<div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif mt-16 mb-16"}">Frequently Asked Questions</h1>
 	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}</div>`;
 });
 var faq = /* @__PURE__ */ Object.freeze({
