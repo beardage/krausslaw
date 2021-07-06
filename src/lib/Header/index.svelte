@@ -8,7 +8,7 @@
     <div class="flex h-16 flex-grow flex-col">
       <div class="flex flex-between justify-between pt-5 pb-5 border-b border-primary-900">
         <div class="flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl">
-          KraussLaw
+          <a sveltekit:prefetch href="/">KraussLaw</a>
         </div>
         <div class="hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end">
           <a sveltekit:prefetch href="/" class="text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold">
