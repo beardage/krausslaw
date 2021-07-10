@@ -2462,6 +2462,9 @@ function add_attribute(name, value, boolean) {
     return "";
   return ` ${name}${value === true ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
 }
+function add_classes(classes) {
+  return classes ? ` class="${classes}"` : "";
+}
 function destroy_component(component, detaching) {
   const $$ = component.$$;
   if ($$.fragment !== null) {
@@ -2630,9 +2633,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-e5d5f6d5.js",
+      file: "/./_app/start-2d43858e.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-e5d5f6d5.js", "/./_app/chunks/vendor-dab8e6e1.js"]
+      js: ["/./_app/start-2d43858e.js", "/./_app/chunks/vendor-75e08489.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2727,7 +2730,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-efb08520.js", "css": ["/./_app/assets/pages/__layout.svelte-e3885eae.css"], "js": ["/./_app/pages/__layout.svelte-efb08520.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-05945fca.js", "css": [], "js": ["/./_app/error.svelte-05945fca.js", "/./_app/chunks/vendor-dab8e6e1.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-3800b4ec.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-3800b4ec.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Consultation-1ab77ab7.js", "/./_app/chunks/Faqs-9119adcb.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-a0ce3c67.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-a0ce3c67.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-20eb988b.js", "css": [], "js": ["/./_app/pages/contact.svelte-20eb988b.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-1ab77ab7.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-5d6b6c24.js", "css": [], "js": ["/./_app/pages/about.svelte-5d6b6c24.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-6f2550b2.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-6f2550b2.js", "/./_app/chunks/vendor-dab8e6e1.js", "/./_app/chunks/Faqs-9119adcb.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-d44546c1.js", "css": ["/./_app/assets/pages/__layout.svelte-e4c01c74.css"], "js": ["/./_app/pages/__layout.svelte-d44546c1.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-0951da90.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-0951da90.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-9250018f.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-f03579c1.js", "css": [], "js": ["/./_app/pages/contact.svelte-f03579c1.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-c11a7d00.js", "css": [], "js": ["/./_app/pages/about.svelte-c11a7d00.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-83cc4ef0.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-83cc4ef0.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-9250018f.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2742,33 +2745,30 @@ function render(request, {
   return respond({ ...request, host }, options, { prerender: prerender2 });
 }
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<header><nav class="${""}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex h-16 flex-grow flex-col"}"><div class="${"flex flex-between justify-between pt-5 pb-5 border-b border-primary-900"}"><div class="${"flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl"}">KraussLaw
-        </div>
-        <div class="${"hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
-          </a>
-          <a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
-          </a>
-          <a sveltekit:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Practice Areas
-          </a>
-          <a sveltekit:prefetch href="${"/faq/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">FAQs
-          </a>
-          <a sveltekit:prefect href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
-          </a></div></div>
-      <div class="${"hidden sm:ml-6 sm:flex sm:items-center"}"></div>
-      <div class="${"-mr-2 flex items-center sm:hidden"}">
-        <button type="${"button"}" class="${"inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"}" aria-controls="${"mobile-menu"}" aria-expanded="${"false"}"><span class="${"sr-only"}">Open main menu</span>
-          
-          <svg class="${"block h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M4 6h16M4 12h16M4 18h16"}"></path></svg>
-          
-          <svg class="${"hidden h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M6 18L18 6M6 6l12 12"}"></path></svg></button></div></div></div>
- 
-  
-  <div class="${"sm:hidden"}" id="${"mobile-menu"}"><div class="${"pt-2 pb-3 space-y-1"}">
-      <a svelte:prefetch href="${"/"}" class="${"bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Home</a>
-      <a svelte:prefetch href="${"/about/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">About</a>
-      <a svelte:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Practice Areas</a>
-      <a svelte:prefetch href="${"/faq/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">FAQs</a>
-      <a svelte:prefetch href="${"/contact/"}" class="${"border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"}">Contact</a></div></div></nav></header>`;
+  return `<header><nav class="${""}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex h-16 flex-grow flex-col"}"><div class="${"flex flex-between justify-between pt-5 pb-5 border-b border-primary-900 relative"}"><div class="${"flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl"}"><a sveltekit:prefetch href="${"/"}">KraussLaw</a></div>
+					<div class="${"hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
+						</a>
+						<a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
+						</a>
+						<a sveltekit:prefetch href="${"/practice-areas/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Practice Areas
+						</a>
+						<a sveltekit:prefetch href="${"/faq/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">FAQs
+						</a>
+						<a sveltekit:prefetch href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
+						</a></div>
+					<button type="${"button"}" id="${"mobileNavToggle"}" class="${"inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"}" aria-controls="${"mobile-menu"}" aria-expanded="${"false"}"><span class="${"sr-only"}">Open main menu</span>
+						
+						<svg class="${"block h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M4 6h16M4 12h16M4 18h16"}"></path></svg>
+						
+						<svg class="${"hidden h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M6 18L18 6M6 6l12 12"}"></path></svg></button></div>
+				<div class="${"-mr-2 flex items-center sm:hidden"}"></div></div></div>
+
+		<div id="${"mobile-menu"}"${add_classes([" hidden"].join(" ").trim())}><div class="${"absolute right-4 z-50 space-y-1 bg-primary-800 border-primary-600"}">
+				<a sveltekit:prefetch href="${"/"}" class="${"uppercase text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Home</a>
+				<a sveltekit:prefetch href="${"/about/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">About</a>
+				<a sveltekit:prefetch href="${"/practice-areas/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Practice Areas</a>
+				<a sveltekit:prefetch href="${"/faq/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">FAQs</a>
+				<a sveltekit:prefetch href="${"/contact/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/"}">Home</a>
