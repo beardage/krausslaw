@@ -56,7 +56,7 @@
 					<button
 						type="button"
 						id="mobileNavToggle"
-						class="inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"
+						class="inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-primary-700"
 						aria-controls="mobile-menu"
 						aria-expanded="false"
 						on:click={toggleMobileNav}
@@ -115,36 +115,36 @@
 		</div>
 
 		<div class:nav-visible={mobileNavOpen} class:hidden={!mobileNavOpen} id="mobile-menu">
-			<div class="absolute right-0 z-50 pt-2 pb-3 space-y-1 bg-primary-800">
+			<div class="absolute right-4 z-50 space-y-1 bg-primary-800 border-primary-600">
 				<!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
 				<a
 					sveltekit:prefetch
 					href="/"
-					class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+					class="uppercase text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
 					>Home</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/about/"
-					class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
 					>About</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/practice-areas/"
-					class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
 					>Practice Areas</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/faq/"
-					class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
 					>FAQs</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/contact/"
-					class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
 					>Contact</a
 				>
 			</div>
