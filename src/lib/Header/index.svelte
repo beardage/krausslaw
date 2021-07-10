@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+
+	let mobileNavOpen = false;
+
+	function toggleMobileNav() {
+		mobileNavOpen = !mobileNavOpen;
+	}
 </script>
 
 <header>
 	<nav class="">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex h-16 flex-grow flex-col">
-				<div class="flex flex-between justify-between pt-5 pb-5 border-b border-primary-900">
+				<div class="flex flex-between justify-between pt-5 pb-5 border-b border-primary-900 relative">
 					<div class="flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl">
 						<a sveltekit:prefetch href="/">KraussLaw</a>
 					</div>
@@ -49,9 +55,11 @@
 					</div>
 					<button
 						type="button"
+						id="mobileNavToggle"
 						class="inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"
 						aria-controls="mobile-menu"
 						aria-expanded="false"
+						on:click={toggleMobileNav}
 					>
 						<span class="sr-only">Open main menu</span>
 						<!--
@@ -106,9 +114,8 @@
 			</div>
 		</div>
 
-		<!-- Mobile menu, show/hide based on menu state. -->
-		<div class="hidden" id="mobile-menu">
-			<div class="pt-2 pb-3 space-y-1">
+		<div class:nav-visible={mobileNavOpen} class:hidden={!mobileNavOpen} id="mobile-menu">
+			<div class="absolute right-0 z-50 pt-2 pb-3 space-y-1 bg-primary-800">
 				<!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
 				<a
 					sveltekit:prefetch
