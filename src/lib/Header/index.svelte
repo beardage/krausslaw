@@ -16,7 +16,7 @@
 					<div class="flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl">
 						<a sveltekit:prefetch href="/">KraussLaw</a>
 					</div>
-					<div class="hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end">
+					<div class="hidden flex-grow sm:ml-8 md:flex md:space-x-8 uppercase content-end justify-end">
 						<a
 							sveltekit:prefetch
 							href="/"
@@ -56,7 +56,7 @@
 					<button
 						type="button"
 						id="mobileNavToggle"
-						class="inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"
+						class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"
 						aria-controls="mobile-menu"
 						aria-expanded="false"
 						on:click={toggleMobileNav}
@@ -121,36 +121,31 @@
 					sveltekit:prefetch
 					href="/"
 					class="uppercase text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
-                    on:click={toggleMobileNav}
-					>Home</a
+					on:click={toggleMobileNav}>Home</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/about/"
 					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
-                    on:click={toggleMobileNav}
-					>About</a
+					on:click={toggleMobileNav}>About</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/practice-areas/"
 					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
-                    on:click={toggleMobileNav}
-					>Practice Areas</a
+					on:click={toggleMobileNav}>Practice Areas</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/faq/"
 					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
-                    on:click={toggleMobileNav}
-					>FAQs</a
+					on:click={toggleMobileNav}>FAQs</a
 				>
 				<a
 					sveltekit:prefetch
 					href="/contact/"
 					class="uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"
-                    on:click={toggleMobileNav}
-					>Contact</a
+					on:click={toggleMobileNav}>Contact</a
 				>
 			</div>
 		</div>
