@@ -2633,9 +2633,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-2d43858e.js",
+      file: "/./_app/start-55ef0f99.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-2d43858e.js", "/./_app/chunks/vendor-75e08489.js"]
+      js: ["/./_app/start-55ef0f99.js", "/./_app/chunks/vendor-75e08489.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2730,7 +2730,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-d44546c1.js", "css": ["/./_app/assets/pages/__layout.svelte-e4c01c74.css"], "js": ["/./_app/pages/__layout.svelte-d44546c1.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-0951da90.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-0951da90.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-9250018f.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-f03579c1.js", "css": [], "js": ["/./_app/pages/contact.svelte-f03579c1.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-c11a7d00.js", "css": [], "js": ["/./_app/pages/about.svelte-c11a7d00.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-83cc4ef0.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-83cc4ef0.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-9250018f.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-b6e3d365.js", "css": ["/./_app/assets/pages/__layout.svelte-102384ff.css"], "js": ["/./_app/pages/__layout.svelte-b6e3d365.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-23fa8f47.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-23fa8f47.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-5be45ee1.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-f03579c1.js", "css": [], "js": ["/./_app/pages/contact.svelte-f03579c1.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-c11a7d00.js", "css": [], "js": ["/./_app/pages/about.svelte-c11a7d00.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-31e42763.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-31e42763.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-5be45ee1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2746,7 +2746,7 @@ function render(request, {
 }
 var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<header><nav class="${""}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}"><div class="${"flex h-16 flex-grow flex-col"}"><div class="${"flex flex-between justify-between pt-5 pb-5 border-b border-primary-900 relative"}"><div class="${"flex-shrink-0 flex items-center text-primary-700 font-serif text-2xl"}"><a sveltekit:prefetch href="${"/"}">KraussLaw</a></div>
-					<div class="${"hidden flex-grow sm:ml-8 sm:flex sm:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
+					<div class="${"hidden flex-grow sm:ml-8 md:flex md:space-x-8 uppercase content-end justify-end"}"><a sveltekit:prefetch href="${"/"}" class="${"text-secondary-800 inline-flex items-center px-1 pt-1 text-sm font-semibold"}">Home
 						</a>
 						<a sveltekit:prefetch href="${"/about/"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">About
 						</a>
@@ -2756,35 +2756,31 @@ var Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 						</a>
 						<a sveltekit:prefetch href="${"/contact"}" class="${"border-transparent text-secondary-800 hover:text-secondary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-semibold"}">Contact
 						</a></div>
-					<button type="${"button"}" id="${"mobileNavToggle"}" class="${"inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"}" aria-controls="${"mobile-menu"}" aria-expanded="${"false"}"><span class="${"sr-only"}">Open main menu</span>
-						
+					<button type="${"button"}" id="${"mobileNavToggle"}" class="${"md:hidden inline-flex items-center justify-center p-2 rounded-md text-primary-800 hover:text-secondary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-700"}" aria-controls="${"mobile-menu"}" aria-expanded="${"false"}"><span class="${"sr-only"}">Open main menu</span>
 						<svg class="${"block h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M4 6h16M4 12h16M4 18h16"}"></path></svg>
-						
-						<svg class="${"hidden h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M6 18L18 6M6 6l12 12"}"></path></svg></button></div>
-				<div class="${"-mr-2 flex items-center sm:hidden"}"></div></div></div>
+						<svg class="${"hidden h-6 w-6"}" xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" stroke="${"currentColor"}" aria-hidden="${"true"}"><path stroke-linecap="${"round"}" stroke-linejoin="${"round"}" stroke-width="${"2"}" d="${"M6 18L18 6M6 6l12 12"}"></path></svg></button></div></div></div>
 
-		<div id="${"mobile-menu"}"${add_classes([" hidden"].join(" ").trim())}><div class="${"absolute right-4 z-50 space-y-1 bg-primary-800 border-primary-600"}">
-				<a sveltekit:prefetch href="${"/"}" class="${"uppercase text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Home</a>
+		<div id="${"mobile-menu"}"${add_classes([" hidden"].join(" ").trim())}><div class="${"absolute right-4 z-50 space-y-1 bg-primary-800 border-primary-600"}"><a sveltekit:prefetch href="${"/"}" class="${"uppercase text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Home</a>
 				<a sveltekit:prefetch href="${"/about/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">About</a>
 				<a sveltekit:prefetch href="${"/practice-areas/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Practice Areas</a>
 				<a sveltekit:prefetch href="${"/faq/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">FAQs</a>
 				<a sveltekit:prefetch href="${"/contact/"}" class="${"uppercase border-transparent text-gray-100 hover:bg-primary-700 block pl-3 pr-4 py-2 text-base font-medium"}">Contact</a></div></div></nav></header>`;
 });
 var Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16"}"><div class="${"container grid grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/"}">Home</a>
+  return `<footer class="${" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16"}"><div class="${"container grid grid-cols-2 md:grid-cols-4 gap-4 text-sm pt-8 pb-8 border-t border-primary-900"}"><div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/"}">Home</a>
 			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/about/"}">About</a>
 			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/practice-areas/"}">Practice Areas</a>
 			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/faq/"}">FAQs</a>
 			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"/contact/"}">Contact</a></div>
 		<div class="${"uppercase leading-6"}"><p class="${"text-secondary-800 font-semibold"}">test address<br>
-			1234 N. test address drive<br>
-			tucson, arizona 12345<br>
-			p: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"tel:123.123.1234"}">123.123.1234</a><br>
-			f: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
+				1234 N. test address drive<br>
+				tucson, arizona 12345<br>
+				p: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"tel:123.123.1234"}">123.123.1234</a><br>
+				f: <a class="${"text-secondary-800 hover:text-secondary-600"}" href="${"fax:321.321.4321"}">321.321.4321</a></p></div>
 		<div></div>
-		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Facebook</a> 
+		<div class="${"uppercase leading-6"}"><a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Facebook</a>
 			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Instagram</a>
-			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Linkedin</a> 
+			<a class="${"text-secondary-800 hover:text-secondary-600 font-semibold block mb-1"}" href="${"#"}">Linkedin</a>
 			<br>
 			<p class="${"text-secondary-800"}">\xA92021 KraussLaw. All Rights Reserved.</p></div></div></footer>`;
 });
@@ -2880,7 +2876,7 @@ var Consultation = create_ssr_component(($$result, $$props, $$bindings, slots) =
 });
 var css = {
   code: ".answer--hidden.svelte-183qm3u{max-height:0px;opacity:0;padding-top:0px;padding-bottom:0px;padding-right:1rem;padding-left:1rem;--tw-translate-y:-2.5rem}.answer--active.svelte-183qm3u{max-height:100%;opacity:1;padding:1rem;--tw-translate-y:0px}",
-  map: '{"version":3,"file":"Faq.svelte","sources":["Faq.svelte"],"sourcesContent":["<script>\\n\\texport let faq;\\n\\t\\n\\tlet active = false;\\n\\t\\n\\tfunction toggleActive() {\\n\\t\\tactive = !active;\\t\\n\\t}\\n<\/script>\\n\\n<div class:active={active} class=\\"faq mb-4 transition-all duration-150 ease-in-out bg-gray-200 rounded\\">\\n\\t<div on:click={toggleActive} class=\\"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative rounded\\">\\n\\t\\t<p>{faq.question}</p>\\n\\t\\t<div class:rotate-90={active} class=\\"indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4\\">\\n\\t\\t\\t\\t<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"16\\" height=\\"16\\" fill=\\"currentColor\\" class=\\"bi bi-chevron-right\\" viewBox=\\"0 0 16 16\\">\\n\\t\\t\\t\\t\\t<path fill-rule=\\"evenodd\\" d=\\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\\"/>\\n\\t\\t\\t\\t</svg>\\n\\t\\t</div>\\n\\t</div>\\n\\t<div class:answer--hidden={!active} class:answer--active={active} class=\\"answer z-10 overflow-hidden transition-all transform-gpu duration-150 ease-in-out\\">\\n\\t\\t<p class=\\"z-10\\">{faq.answer}</p>\\n\\t</div>\\n</div>\\n\\n<style>.answer--hidden {\\n  max-height: 0px;\\n  opacity: 0;\\n  padding-top: 0px;\\n  padding-bottom: 0px;\\n  padding-right: 1rem;\\n  padding-left: 1rem;\\n  --tw-translate-y: -2.5rem;\\n}\\n\\n.answer--active {\\n  max-height: 100%;\\n  opacity: 1;\\n  padding: 1rem;\\n  --tw-translate-y: 0px;\\n}</style>\\n"],"names":[],"mappings":"AAwBO,eAAe,eAAC,CAAC,AACtB,UAAU,CAAE,GAAG,CACf,OAAO,CAAE,CAAC,CACV,WAAW,CAAE,GAAG,CAChB,cAAc,CAAE,GAAG,CACnB,aAAa,CAAE,IAAI,CACnB,YAAY,CAAE,IAAI,CAClB,gBAAgB,CAAE,OAAO,AAC3B,CAAC,AAED,eAAe,eAAC,CAAC,AACf,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,gBAAgB,CAAE,GAAG,AACvB,CAAC"}'
+  map: '{"version":3,"file":"Faq.svelte","sources":["Faq.svelte"],"sourcesContent":["<script>\\n\\texport let faq;\\n\\n\\tlet active = false;\\n\\n\\tfunction toggleActive() {\\n\\t\\tactive = !active;\\n\\t}\\n<\/script>\\n\\n<div class:active class=\\"faq mb-4 transition-all duration-150 ease-in-out bg-gray-200 rounded\\">\\n\\t<div\\n\\t\\ton:click={toggleActive}\\n\\t\\tclass=\\"question z-20 text-gray-100 bg-secondary-800 p-4 pr-12 cursor-pointer after:empty-content relative rounded\\"\\n\\t>\\n\\t\\t<p>{faq.question}</p>\\n\\t\\t<div\\n\\t\\t\\tclass:rotate-90={active}\\n\\t\\t\\tclass=\\"indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4\\"\\n\\t\\t>\\n\\t\\t\\t<svg\\n\\t\\t\\t\\txmlns=\\"http://www.w3.org/2000/svg\\"\\n\\t\\t\\t\\twidth=\\"16\\"\\n\\t\\t\\t\\theight=\\"16\\"\\n\\t\\t\\t\\tfill=\\"currentColor\\"\\n\\t\\t\\t\\tclass=\\"bi bi-chevron-right\\"\\n\\t\\t\\t\\tviewBox=\\"0 0 16 16\\"\\n\\t\\t\\t>\\n\\t\\t\\t\\t<path\\n\\t\\t\\t\\t\\tfill-rule=\\"evenodd\\"\\n\\t\\t\\t\\t\\td=\\"M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z\\"\\n\\t\\t\\t\\t/>\\n\\t\\t\\t</svg>\\n\\t\\t</div>\\n\\t</div>\\n\\t<div\\n\\t\\tclass:answer--hidden={!active}\\n\\t\\tclass:answer--active={active}\\n\\t\\tclass=\\"answer z-10 overflow-hidden transition-all transform-gpu duration-150 ease-in-out\\"\\n\\t>\\n\\t\\t<p class=\\"z-10\\">{faq.answer}</p>\\n\\t</div>\\n</div>\\n\\n<style>.answer--hidden {\\n  max-height: 0px;\\n  opacity: 0;\\n  padding-top: 0px;\\n  padding-bottom: 0px;\\n  padding-right: 1rem;\\n  padding-left: 1rem;\\n  --tw-translate-y: -2.5rem;\\n}\\n\\n.answer--active {\\n  max-height: 100%;\\n  opacity: 1;\\n  padding: 1rem;\\n  --tw-translate-y: 0px;\\n}</style>\\n"],"names":[],"mappings":"AA4CO,eAAe,eAAC,CAAC,AACtB,UAAU,CAAE,GAAG,CACf,OAAO,CAAE,CAAC,CACV,WAAW,CAAE,GAAG,CAChB,cAAc,CAAE,GAAG,CACnB,aAAa,CAAE,IAAI,CACnB,YAAY,CAAE,IAAI,CAClB,gBAAgB,CAAE,OAAO,AAC3B,CAAC,AAED,eAAe,eAAC,CAAC,AACf,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,CAAC,CACV,OAAO,CAAE,IAAI,CACb,gBAAgB,CAAE,GAAG,AACvB,CAAC"}'
 };
 var Faq$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { faq: faq2 } = $$props;
@@ -2890,7 +2886,7 @@ var Faq$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<div class="${[
     "faq mb-4 transition-all duration-150 ease-in-out bg-gray-200 rounded",
     ""
-  ].join(" ").trim()}"><div class="${"question z-20 text-gray-100 bg-secondary-800 p-4 cursor-pointer after:empty-content relative rounded"}"><p>${escape2(faq2.question)}</p>
+  ].join(" ").trim()}"><div class="${"question z-20 text-gray-100 bg-secondary-800 p-4 pr-12 cursor-pointer after:empty-content relative rounded"}"><p>${escape2(faq2.question)}</p>
 		<div class="${[
     "indicator transform transition-rotate origin-center duration-150 ease-in-out rotate absolute right-3 top-2/4 -translate-y-2/4",
     ""
@@ -2929,23 +2925,25 @@ var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 <section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
 	<h2 class="${"text-gray-800 text-left text-xl"}">If you made a mistake, I&#39;ll help you get your life back on track.</h2></section>
 
-<section class="${"pt-16 pb-16 bg-secondary-800"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4"}"><div class="${"content-container col-span-7 flex flex-row flex-wrap content-center"}"><div><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
-				<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.</p>
+<section class="${"pt-16 pb-16 bg-secondary-800"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4"}"><div class="${"content-container col-span-12 md:col-span-7 mb-8 md:mb-0 flex flex-row flex-wrap content-center"}"><div><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
+				<p class="${"text-gray-100 mb-4"}">Representing clients all across the State of Arizona, but based in Tucson.
+				</p>
 				<p class="${"text-gray-100 mb-4"}">Specializing in these practice areas:</p>
-				<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges
-					</li><li>Cyber Crimes
-					</li><li>Murder and Homicide
-					</li><li>Drug Crimes
-					</li><li>Sex Offenses
-					</li><li>Violent Crimes
-				</li></ul>
+				<ul class="${"text-gray-100 mb-4 list-disc list-inside"}"><li>Gun Charges</li>
+					<li>Cyber Crimes</li>
+					<li>Murder and Homicide</li>
+					<li>Drug Crimes</li>
+					<li>Sex Offenses</li>
+					<li>Violent Crimes</li></ul>
 				<p><a class="${"text-secondary-200"}" href="${"/practice-areas/"}">Read More about these areas of practice here</a></p></div></div>
-		
-		<div class="${"form-container col-span-5"}">${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div></section>
+
+		<div class="${"form-container col-span-12 md:col-span-5"}">${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div></section>
 
 <section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h3 class="${"text-secondary-800 text-4xl font-serif text-center mb-12"}">Frequently Asked Questions</h3>
 	${validate_component(Faqs, "Faqs").$$render($$result, {}, {}, {})}
-	<p class="${"mt-8 mb-8"}">The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is the best thing you can do for your future, but you can also arm yourself with information about your rights.</p>
+	<p class="${"mt-8 mb-8"}">The legal system can be daunting, especially if you are new to it. Choosing a knowledgable defense attorney is
+		the best thing you can do for your future, but you can also arm yourself with information about your rights.
+	</p>
 	<p class="${"text-center"}"><a class="${"text-primary-800 underline"}" href="${"/faq/"}">Read more frequently asked questions here.</a></p></section>`;
 });
 var index = /* @__PURE__ */ Object.freeze({
