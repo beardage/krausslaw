@@ -62,13 +62,6 @@
 						on:click={toggleMobileNav}
 					>
 						<span class="sr-only">Open main menu</span>
-						<!--
-            Icon when menu is closed.
- 
-            Heroicon name: outline/menu
- 
-            Menu open: "hidden", Menu closed: "block"
-          -->
 						<svg
 							class="block h-6 w-6"
 							xmlns="http://www.w3.org/2000/svg"
@@ -84,13 +77,6 @@
 								d="M4 6h16M4 12h16M4 18h16"
 							/>
 						</svg>
-						<!--
-            Icon when menu is open.
- 
-            Heroicon name: outline/x
- 
-            Menu open: "block", Menu closed: "hidden"
-          -->
 						<svg
 							class="hidden h-6 w-6"
 							xmlns="http://www.w3.org/2000/svg"
@@ -108,15 +94,11 @@
 						</svg>
 					</button>
 				</div>
-				<div class="-mr-2 flex items-center sm:hidden">
-					<!-- Mobile menu button -->
-				</div>
 			</div>
 		</div>
 
 		<div class:nav-visible={mobileNavOpen} class:hidden={!mobileNavOpen} id="mobile-menu">
 			<div class="absolute right-4 z-50 space-y-1 bg-primary-800 border-primary-600">
-				<!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
 				<a
 					sveltekit:prefetch
 					href="/"
