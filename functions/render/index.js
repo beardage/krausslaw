@@ -2633,9 +2633,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-55ef0f99.js",
+      file: "/./_app/start-0f1e9627.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-55ef0f99.js", "/./_app/chunks/vendor-75e08489.js"]
+      js: ["/./_app/start-0f1e9627.js", "/./_app/chunks/vendor-75e08489.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2730,7 +2730,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-b6e3d365.js", "css": ["/./_app/assets/pages/__layout.svelte-102384ff.css"], "js": ["/./_app/pages/__layout.svelte-b6e3d365.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-23fa8f47.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-23fa8f47.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-5be45ee1.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-f03579c1.js", "css": [], "js": ["/./_app/pages/contact.svelte-f03579c1.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-c11a7d00.js", "css": [], "js": ["/./_app/pages/about.svelte-c11a7d00.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-31e42763.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-31e42763.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-5be45ee1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-788bf004.js", "css": ["/./_app/assets/pages/__layout.svelte-260262ad.css"], "js": ["/./_app/pages/__layout.svelte-788bf004.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-23fa8f47.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-23fa8f47.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-5be45ee1.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-7664db7f.js", "css": [], "js": ["/./_app/pages/contact.svelte-7664db7f.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4a7b101b.js", "css": [], "js": ["/./_app/pages/about.svelte-4a7b101b.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-31e42763.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-31e42763.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-5be45ee1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -3103,11 +3103,11 @@ var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
 
 <div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">Contact</h1>
-	<div class="${"grid grid-cols-2 gap-4 mt-16"}"><div class="${"my-4"}"><p>test address<br>
-			1234 N. test address drive<br>
-			tucson, arizona 12345<br>
-			p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
-			f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p>
+	<div class="${"grid md:grid-cols-2 gap-4 mt-16"}"><div class="${"order-2 md:order-1 my-4"}"><p>test address<br>
+				1234 N. test address drive<br>
+				tucson, arizona 12345<br>
+				p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
+				f: <a href="${"fax:321.321.4321"}">321.321.4321</a></p>
 			${ready ? `${validate_component(Location, "Location").$$render($$result, {}, {}, {})}` : ``}</div>
 		${validate_component(Consultation, "Consultation").$$render($$result, {}, {}, {})}</div></div>`;
 });
@@ -3126,13 +3126,23 @@ var About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}`, ""}
 
 <div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">About KraussLaw</h1>
-	<div class="${"grid grid-cols-2 gap-8"}"><div class="${"description"}"><p class="${"mb-8"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ex ligula. Aliquam nec quam risus. Donec cursus accumsan odio, ac pulvinar nibh auctor sit amet. Phasellus a accumsan tortor. Vestibulum ullamcorper faucibus vehicula. Suspendisse nec convallis nibh. Proin ac elit ipsum. Aenean congue iaculis varius. Aliquam et placerat metus, sit amet tincidunt lectus. Morbi nibh dolor, elementum ut dolor eu, rhoncus rhoncus orci.</p>
-			<p class="${"mb-8"}">Duis finibus, enim a imperdiet porttitor, ante est scelerisque leo, eget dictum magna arcu mollis risus. Mauris cursus, nisi euismod ultrices gravida, tellus nibh rhoncus erat, a dapibus dolor purus sed augue. Phasellus congue tincidunt mauris, non dignissim est feugiat id. Praesent nisl nisl, porta non pretium nec, ullamcorper nec nulla. Aenean dapibus mattis metus, vel placerat ipsum rutrum et. Phasellus at porta nibh. Pellentesque accumsan convallis sagittis. Integer fringilla orci a volutpat pellentesque.</p>
+	<div class="${"grid md:grid-cols-2 gap-8"}"><div class="${"order-2 md:order-1 description"}"><p class="${"mb-8"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ex ligula. Aliquam nec quam
+				risus. Donec cursus accumsan odio, ac pulvinar nibh auctor sit amet. Phasellus a accumsan tortor.
+				Vestibulum ullamcorper faucibus vehicula. Suspendisse nec convallis nibh. Proin ac elit ipsum. Aenean
+				congue iaculis varius. Aliquam et placerat metus, sit amet tincidunt lectus. Morbi nibh dolor, elementum
+				ut dolor eu, rhoncus rhoncus orci.
+			</p>
+			<p class="${"mb-8"}">Duis finibus, enim a imperdiet porttitor, ante est scelerisque leo, eget dictum magna arcu mollis risus.
+				Mauris cursus, nisi euismod ultrices gravida, tellus nibh rhoncus erat, a dapibus dolor purus sed augue.
+				Phasellus congue tincidunt mauris, non dignissim est feugiat id. Praesent nisl nisl, porta non pretium
+				nec, ullamcorper nec nulla. Aenean dapibus mattis metus, vel placerat ipsum rutrum et. Phasellus at
+				porta nibh. Pellentesque accumsan convallis sagittis. Integer fringilla orci a volutpat pellentesque.
+			</p>
 			<h3 class="${"text-secondary-800 font-serif text-2xl mt-8 mb-4"}">Education / Experience</h3>
 			<ul><li>thing 1</li>
 				<li>thing 2</li>
 				<li>thing 3</li></ul></div>
-		<div class="${"photo"}"><img class="${"full-w"}" src="${"https://via.placeholder.com/600x600/065F46/92400E"}"></div></div></div>`;
+		<div class="${"order-1 md:order-2 photo"}"><img class="${"full-w"}" src="${"https://via.placeholder.com/600x600/065F46/92400E"}"></div></div></div>`;
 });
 var about = /* @__PURE__ */ Object.freeze({
   __proto__: null,
