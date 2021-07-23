@@ -2633,9 +2633,9 @@ function init(settings) {
     amp: false,
     dev: false,
     entry: {
-      file: "/./_app/start-0f1e9627.js",
+      file: "/./_app/start-9bfb2eaf.js",
       css: ["/./_app/assets/start-230d6437.css"],
-      js: ["/./_app/start-0f1e9627.js", "/./_app/chunks/vendor-75e08489.js"]
+      js: ["/./_app/start-9bfb2eaf.js", "/./_app/chunks/vendor-75e08489.js"]
     },
     fetched: void 0,
     floc: false,
@@ -2730,7 +2730,7 @@ var module_lookup = {
     return faq;
   })
 };
-var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-788bf004.js", "css": ["/./_app/assets/pages/__layout.svelte-260262ad.css"], "js": ["/./_app/pages/__layout.svelte-788bf004.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-23fa8f47.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-23fa8f47.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-ee6cbebd.js", "/./_app/chunks/Faqs-5be45ee1.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-7664db7f.js", "css": [], "js": ["/./_app/pages/contact.svelte-7664db7f.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-ee6cbebd.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4a7b101b.js", "css": [], "js": ["/./_app/pages/about.svelte-4a7b101b.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-31e42763.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-31e42763.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-5be45ee1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
+var metadata_lookup = { "src/routes/__layout.svelte": { "entry": "/./_app/pages/__layout.svelte-fa4ead4a.js", "css": ["/./_app/assets/pages/__layout.svelte-73f156bf.css"], "js": ["/./_app/pages/__layout.svelte-fa4ead4a.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, ".svelte-kit/build/components/error.svelte": { "entry": "/./_app/error.svelte-4e9f115e.js", "css": [], "js": ["/./_app/error.svelte-4e9f115e.js", "/./_app/chunks/vendor-75e08489.js"], "styles": null }, "src/routes/index.svelte": { "entry": "/./_app/pages/index.svelte-0cee5ddd.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/index.svelte-0cee5ddd.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Consultation-41af5b1a.js", "/./_app/chunks/Faqs-5be45ee1.js"], "styles": null }, "src/routes/practice-areas.svelte": { "entry": "/./_app/pages/practice-areas.svelte-da910f4c.js", "css": [], "js": ["/./_app/pages/practice-areas.svelte-da910f4c.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/contact.svelte": { "entry": "/./_app/pages/contact.svelte-08783037.js", "css": [], "js": ["/./_app/pages/contact.svelte-08783037.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js", "/./_app/chunks/Consultation-41af5b1a.js"], "styles": null }, "src/routes/about.svelte": { "entry": "/./_app/pages/about.svelte-4a7b101b.js", "css": [], "js": ["/./_app/pages/about.svelte-4a7b101b.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/env-a13806e5.js"], "styles": null }, "src/routes/faq.svelte": { "entry": "/./_app/pages/faq.svelte-31e42763.js", "css": ["/./_app/assets/Faqs-96d2b5b5.css"], "js": ["/./_app/pages/faq.svelte-31e42763.js", "/./_app/chunks/vendor-75e08489.js", "/./_app/chunks/Faqs-5be45ee1.js", "/./_app/chunks/env-a13806e5.js"], "styles": null } };
 async function load_component(file) {
   return {
     module: await module_lookup[file](),
@@ -2847,25 +2847,50 @@ var Consultation = create_ssr_component(($$result, $$props, $$bindings, slots) =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   });
-  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"consultation-form"}" class="${"w-full bg-gray-100 shadow rounded p-6"}"><h4 class="${"text-center text-secondary-800 font-serif text-4xl"}">Get A Free Consultation</h4>
+  let colorbg = false;
+  onMount(() => {
+    console.log(window.location);
+    if (window.location.pathname == "/contact") {
+      colorbg = true;
+    }
+  });
+  return `<form netlify netlify-honeypot="${"bot-field"}" name="${"consultation-form"}" class="${[
+    "w-full bg-gray-100 shadow rounded p-6 order-1 md:order-2",
+    colorbg ? "bg-secondary-800" : ""
+  ].join(" ").trim()}"><h4 class="${[
+    "text-center font-serif text-4xl",
+    (colorbg ? "text-gray-200" : "") + " " + (!colorbg ? "text-secondary-800" : "")
+  ].join(" ").trim()}">Get A Free Consultation
+	</h4>
 	<hr class="${"mt-2 mb-4"}">
-	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"name"}">Name
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 md:mb-0"}"><label class="${[
+    "block uppercase tracking-wide text-xs font-bold mb-2",
+    (colorbg ? "text-gray-200" : "") + " " + (!colorbg ? "text-secondary-800" : "")
+  ].join(" ").trim()}" for="${"name"}">Name
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"name"}" name="${"name"}" type="${"text"}" placeholder="${"John Smith"}"></div></div>
 
-	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"email"}">E-mail
-
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${[
+    "block uppercase tracking-wide text-xs font-bold mb-2",
+    (colorbg ? "text-gray-200" : "") + " " + (!colorbg ? "text-secondary-800" : "")
+  ].join(" ").trim()}" for="${"email"}">E-mail
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"email"}" name="${"email"}" type="${"email"}" placeholder="${"johnsmith@example.com"}"></div></div>
 
-	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 mb-6 md:mb-0"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"phone"}">Phone
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3 md:mb-0"}"><label class="${[
+    "block uppercase tracking-wide text-xs font-bold mb-2",
+    (colorbg ? "text-gray-200" : "") + " " + (!colorbg ? "text-secondary-800" : "")
+  ].join(" ").trim()}" for="${"phone"}">Phone
 			</label>
 
 			<input class="${"appearance-none block w-full bg-gray-300 text-gray-800 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200"}" id="${"phone"}" name="${"phone"}" type="${"phone"}" placeholder="${"520-123-1234"}"></div></div>
 
-	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${"block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"}" for="${"message"}">Message
+	<div class="${"flex flex-wrap -mx-3 mb-2"}"><div class="${"w-full px-3"}"><label class="${[
+    "block uppercase tracking-wide text-xs font-bold mb-2",
+    (colorbg ? "text-gray-200" : "") + " " + (!colorbg ? "text-secondary-800" : "")
+  ].join(" ").trim()}" for="${"message"}">Message
 			</label>
 
 			<textarea class="${" no-resize appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-200 h-48 resize-none"}" id="${"message"}" name="${"message"}"></textarea></div></div>
@@ -2922,7 +2947,7 @@ var prerender$4 = true;
 var Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>KraussLaw - Home</title>`, ""}`, ""}
 
-<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-32"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
+<section class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-64 pb-64"}"><h1 class="${"text-teal-700 text-left text-6xl font-serif mb-4"}">Heidi Krauss is beating the fuck out of your case.</h1>
 	<h2 class="${"text-gray-800 text-left text-xl"}">If you made a mistake, I&#39;ll help you get your life back on track.</h2></section>
 
 <section class="${"pt-16 pb-16 bg-secondary-800"}"><div class="${"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-4"}"><div class="${"content-container col-span-12 md:col-span-7 mb-8 md:mb-0 flex flex-row flex-wrap content-center"}"><div><h3 class="${"text-gray-100 text-4xl font-serif mb-8"}">Tucson Criminal Defense Attorney With Conviction</h3>
@@ -3103,7 +3128,7 @@ var Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${$$result.head += `${$$result.title = `<title>Contact</title>`, ""}`, ""}
 
 <div class="${"content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8"}"><h1 class="${"text-secondary-800 text-center text-4xl font-serif my-16"}">Contact</h1>
-	<div class="${"grid md:grid-cols-2 gap-4 mt-16"}"><div class="${"order-2 md:order-1 my-4"}"><p>test address<br>
+	<div class="${"grid md:grid-cols-2 gap-8 mt-16"}"><div class="${"order-2 md:order-1 my-4"}"><p>test address<br>
 				1234 N. test address drive<br>
 				tucson, arizona 12345<br>
 				p: <a href="${"tel:123.123.1234"}">123.123.1234</a><br>
