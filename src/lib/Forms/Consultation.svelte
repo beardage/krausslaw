@@ -36,7 +36,7 @@
 	netlify-honeypot="bot-field"
 	name="consultation-form"
 	class:bg-secondary-800={colorbg}
-	class="w-full bg-gray-100 shadow rounded p-6"
+	class="w-full bg-gray-100 shadow rounded p-6 order-1 md:order-2"
 	on:submit|preventDefault={handleSubmit}
 >
 	<h4 class:text-gray-200={colorbg} class:text-secondary-800={!colorbg} class="text-center font-serif text-4xl">
