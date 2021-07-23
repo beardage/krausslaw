@@ -1,4 +1,13 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
+	let colorbg = false;
+	onMount(() => {
+		console.log(window.location);
+		if (window.location.pathname == '/contact') {
+			colorbg = true;
+		}
+	});
 
 	async function handleSubmit(event) {
 		console.log(event);
@@ -10,25 +19,38 @@
 
 		let formInfo = new FormData(event.target);
 
-		const response = await fetch("/", {
+		const response = await fetch('/', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			body: formInfo,
-		}).then(() => console.log('form successfully submitted')).catch((error) => console.log(error));
+			body: formInfo
+		})
+			.then(() => console.log('form successfully submitted'))
+			.catch((error) => console.log(error));
 	}
-
 </script>
 
-<form netlify netlify-honeypot="bot-field" name="consultation-form" class="w-full bg-gray-100 shadow rounded p-6" on:submit|preventDefault={handleSubmit}>
-	<h4 class="text-center text-secondary-800 font-serif text-4xl">Get A Free Consultation</h4>
-	<hr class="mt-2 mb-4">
+<form
+	netlify
+	netlify-honeypot="bot-field"
+	name="consultation-form"
+	class:bg-secondary-800={colorbg}
+	class="w-full bg-gray-100 shadow rounded p-6"
+	on:submit|preventDefault={handleSubmit}
+>
+	<h4 class:text-gray-200={colorbg} class:text-secondary-800={!colorbg} class="text-center font-serif text-4xl">
+		Get A Free Consultation
+	</h4>
+	<hr class="mt-2 mb-4" />
 	<div class="flex flex-wrap -mx-3 mb-2">
-		<div class="w-full px-3 mb-6 md:mb-0">
+		<div class="w-full px-3 md:mb-0">
 			<label
-				class="block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"
-				for="name">
+				class:text-gray-200={colorbg}
+				class:text-secondary-800={!colorbg}
+				class="block uppercase tracking-wide text-xs font-bold mb-2"
+				for="name"
+			>
 				Name
 			</label>
 
@@ -45,11 +67,12 @@
 	<div class="flex flex-wrap -mx-3 mb-2">
 		<div class="w-full px-3">
 			<label
-				class="block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"
+				class:text-gray-200={colorbg}
+				class:text-secondary-800={!colorbg}
+				class="block uppercase tracking-wide text-xs font-bold mb-2"
 				for="email"
 			>
 				E-mail
-
 			</label>
 
 			<input
@@ -63,10 +86,13 @@
 	</div>
 
 	<div class="flex flex-wrap -mx-3 mb-2">
-		<div class="w-full px-3 mb-6 md:mb-0">
+		<div class="w-full px-3 md:mb-0">
 			<label
-				class="block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"
-				for="phone">
+				class:text-gray-200={colorbg}
+				class:text-secondary-800={!colorbg}
+				class="block uppercase tracking-wide text-xs font-bold mb-2"
+				for="phone"
+			>
 				Phone
 			</label>
 
@@ -83,7 +109,9 @@
 	<div class="flex flex-wrap -mx-3 mb-2">
 		<div class="w-full px-3">
 			<label
-				class="block uppercase tracking-wide text-secondary-800 text-xs font-bold mb-2"
+				class:text-gray-200={colorbg}
+				class:text-secondary-800={!colorbg}
+				class="block uppercase tracking-wide text-xs font-bold mb-2"
 				for="message"
 			>
 				Message
@@ -97,18 +125,15 @@
 		</div>
 	</div>
 
-	<input class="hidden" type="text" name="bot-field">
+	<input class="hidden" type="text" name="bot-field" />
 	<div class="md:flex md:items-center">
 		<div class="w-full">
 			<button
 				class="w-full shadow bg-primary-700 text-gray-100 hover:bg-primary-800 focus:shadow-outline focus:outline-none font-bold px-8 py-2 rounded uppercase"
-				type="submit">
+				type="submit"
+			>
 				Submit
 			</button>
 		</div>
-
-
 	</div>
 </form>
-
-
